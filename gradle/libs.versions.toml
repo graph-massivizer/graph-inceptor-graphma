@@ -1,0 +1,37 @@
+[versions]
+assertj = "3.24.2"
+junit  = "5.9.3"
+junit-platform = "1.9.3"
+junit4 = "4.13.2"
+junit-platform-suite = "1.10.0"
+jcstress-test = "0.16"
+
+[libraries]
+junit-bom               = { module = "org.junit:junit-bom", version.ref = "junit" }
+junit-jupiter           = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
+junit-jupiter-api       = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
+junit-jupiter-engine    = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+junit-jupiter-migration = { module = "org.junit.jupiter:junit-jupiter-migrationsupport", version.ref = "junit" }
+junit-jupiter-params    = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit" }
+junit-vintage-engine    = { module = "org.junit.vintage:junit-vintage-engine", version.ref = "junit" }
+junit-platform-runner   = { module = "org.junit.platform:junit-platform-runner", version.ref = "junit-platform" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit-platform" }
+junit-platform-suite    = { module = "org.junit.platform:junit-platform-suite-engine", version.ref = "junit-platform-suite" }
+junit-vintage           = { module = "junit:junit", version.ref = "junit4" }
+assertj                 = { module = "org.assertj:assertj-core", version.ref = "assertj" }
+jcstress-test           = { module = "org.openjdk.jcstress:jcstress-core", version.ref = "jcstress-test" }
+
+[bundles]
+testDependencies = [
+    "junit-jupiter-api",
+    "junit-jupiter-engine",
+    "junit-jupiter-params",
+    "junit-platform-suite",
+    "assertj",
+]
+stressTestDependencies = [
+    "jcstress-test"
+]
+
+[plugins]
+buildParameters = { id = "org.gradlex.build-parameters", version = "1.4.3" }
