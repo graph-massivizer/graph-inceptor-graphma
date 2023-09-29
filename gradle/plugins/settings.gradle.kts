@@ -1,10 +1,11 @@
-// ╭────────────╮─────╭──╭───────╭────────────╮─────╭──╮
-// │  ┬─╮  ┬─╮  │  ┬──╮  │  ┬─╮  ╮  ┬─╮  ┬─╮  │  ┬──╮  │
-// ╰──╯ ╰──╯ ╰──╯─────╰──┌──╮─╯  │──╯ ╰──╯ ╰──┴─────╰──┴
-//                       ╰───────╯
-//   Copyright (C) Tobias Herb - All Rights Reserved.
-//  Unauthorized copying of this file, via any medium
-// is strictly prohibited. Proprietary and confidential.
+// 		╭━━━╮	    ╭╮ ╭━╮╭━╮
+// 		┃╭━╮┃	    ┃┃ ┃┃╰╯┃┃
+// 		┃┃╱╰╋━┳━━┳━━┫╰━┫╭╮╭╮┣━━╮
+// 		┃┃╭━┫╭┫╭╮┃╭╮┃╭╮┃┃┃┃┃┃╭╮┃
+// 		┃╰┻━┃┃┃╭╮┃╰╯┃┃┃┃┃┃┃┃┃╭╮┃
+// 		╰━━━┻╯╰╯╰┫╭━┻╯╰┻╯╰╯╰┻╯╰╯
+// 				 ┃┃
+//
 
 val expectedJavaVersion = JavaVersion.VERSION_17
 val actualJavaVersion   = JavaVersion.VERSION_17
