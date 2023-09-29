@@ -9,7 +9,7 @@
 val expectedJavaVersion = JavaVersion.VERSION_17
 val actualJavaVersion   = JavaVersion.VERSION_17
 require(actualJavaVersion == expectedJavaVersion) {
-	"The Magma build must be executed with Java ${expectedJavaVersion.majorVersion}. Currently executing with Java ${actualJavaVersion.majorVersion}."
+	"The Graphgma build must be executed with Java ${expectedJavaVersion.majorVersion}. Currently executing with Java ${actualJavaVersion.majorVersion}."
 }
 
 dependencyResolutionManagement {

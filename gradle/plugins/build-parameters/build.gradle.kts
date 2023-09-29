@@ -10,10 +10,10 @@ plugins {
 	alias(libs.plugins.buildParameters)
 }
 
-group = "magma-build"
+group = "graphma-build"
 
 buildParameters {
-	pluginId("magma-build.build-parameters")
+	pluginId("graphma-build.build-parameters")
 	integer("javaToolchainVersion") {
 		description.set("Defines the Java toolchain version to use for compiling code")
 	}

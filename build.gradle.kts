@@ -7,7 +7,7 @@
 // is strictly prohibited. Proprietary and confidential.
 
 plugins {
-	id("magma-build.base-conventions")
+	id("graphma-build.base-conventions")
 }
 
 description = "graphma"

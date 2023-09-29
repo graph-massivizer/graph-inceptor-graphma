@@ -84,8 +84,13 @@ We have implemented the following terminal operators:
 
 # Notes for Gradle Build
 
-- All files ending with 'gradle.kts' are automatically detected by Gradle.
-- Gradle was configured in such a way that the corresponding module files must bear the same name as the module.
+* All files ending with 'gradle.kts' are automatically detected by Gradle.
+* Gradle was configured in such a way that the corresponding module files must bear the same name as the module.
+* Please add you credentials to 'gradle/plugins/common/src/main/kotlin/graphma-build.publishing-conventions.gradle.kts'
+* Dependencies are bundled in 'gradle/libs.versions.toml' before adding dependencies please 
+  * check if the dependency is already present in the file.
+  * look for an adequate bundle or create a new one.
+    * if you create a new bundle make sure you only import it into the module that requires the dependencies.
 
 # Proposed Architecture for Graph Inceptor 
 

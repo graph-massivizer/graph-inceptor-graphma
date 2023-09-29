@@ -29,6 +29,7 @@ testDependencies = [
     "junit-platform-suite",
     "assertj",
 ]
+
 stressTestDependencies = [
     "jcstress-test"
 ]
