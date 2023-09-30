@@ -1,0 +1,1 @@
+* rename both project repositories

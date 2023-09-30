@@ -13,7 +13,9 @@
  * <p>This includes APIs for value representations, control flow abstractions,
  * containers & computation data structures.
  */
-module demos {
+module playground {
 
     requires magma;
+
+    requires data;
 }
