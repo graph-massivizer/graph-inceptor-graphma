@@ -80,10 +80,11 @@ We have implemented the following terminal operators:
 - Single
 
 
-
+# Structure of the Repository
 
 # Notes for Gradle Build
 
+* Is build based on [this](https://github.com/jjohannes/gradle-project-setup-howto/tree/java_module_system)
 * All files ending with 'gradle.kts' are automatically detected by Gradle.
 * Gradle was configured in such a way that the corresponding module files must bear the same name as the module.
 * Please add you credentials to 'gradle/plugins/common/src/main/kotlin/graphma-build.publishing-conventions.gradle.kts'
@@ -91,6 +92,7 @@ We have implemented the following terminal operators:
   * check if the dependency is already present in the file.
   * look for an adequate bundle or create a new one.
     * if you create a new bundle make sure you only import it into the module that requires the dependencies.
+* The magma library is important with the help of a local maven repository. It is important that we include this repository in the main settings.gradle.kts under dependencyResolutionManagement, and in the graphma-build.java-library-conventions.gradle.kts under repositories. Do not forget to require the module in the coresponding module-info.java and adjust the libs.versions.toml 
 
 # Proposed Architecture for Graph Inceptor 
 

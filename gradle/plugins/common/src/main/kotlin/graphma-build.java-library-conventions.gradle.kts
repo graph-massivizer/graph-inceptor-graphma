@@ -15,6 +15,9 @@ plugins {
 // Use Maven Central for external dependencies
 repositories {
 	mavenCentral()
+	maven {
+		url = uri("${project.rootDir}/localMavenRepo")
+	}
 }
 
 // Enable deprecation messages when compiling Java code

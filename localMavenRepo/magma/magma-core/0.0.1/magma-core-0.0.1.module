@@ -1,0 +1,60 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "magma",
+    "module": "magma-core",
+    "version": "0.0.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.2.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "magma-core-0.0.1.jar",
+          "url": "magma-core-0.0.1.jar",
+          "size": 1090290,
+          "sha512": "08f936b069f08173054272f909ce73b246fc778a60239fb4bfdb8e71c21123bfc78d301c78e1451ef0e36c459500159b4f57c0917b242f66a1532e0770a2c0ec",
+          "sha256": "0347271ba888b45dc85642f18a4a7cf0e93e039059ee4948a8f0193c88547448",
+          "sha1": "30618b787d1764c04ff9c92ac14d595a719395b8",
+          "md5": "28e6f6461e107ec5785963d0d435193d"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "magma-core-0.0.1.jar",
+          "url": "magma-core-0.0.1.jar",
+          "size": 1090290,
+          "sha512": "08f936b069f08173054272f909ce73b246fc778a60239fb4bfdb8e71c21123bfc78d301c78e1451ef0e36c459500159b4f57c0917b242f66a1532e0770a2c0ec",
+          "sha256": "0347271ba888b45dc85642f18a4a7cf0e93e039059ee4948a8f0193c88547448",
+          "sha1": "30618b787d1764c04ff9c92ac14d595a719395b8",
+          "md5": "28e6f6461e107ec5785963d0d435193d"
+        }
+      ]
+    }
+  ]
+}

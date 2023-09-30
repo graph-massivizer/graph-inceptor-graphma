@@ -25,6 +25,7 @@ plugins {
 dependencyResolutionManagement {
 	repositories {
 		mavenCentral()
+		maven(url = uri("${rootDir}/localMavenRepo"))
 		maven(url = "https://oss.sonatype.org/content/repositories/snapshots") {
 			mavenContent {
 				snapshotsOnly()

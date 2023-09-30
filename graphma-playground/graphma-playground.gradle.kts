@@ -14,4 +14,5 @@ plugins {
 
 dependencies {
 	testImplementation(libs.bundles.testDependencies)
+	implementation(libs.bundles.magmaDependencies)
 }

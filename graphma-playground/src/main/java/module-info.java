@@ -15,4 +15,5 @@
  */
 module demos {
 
+    requires magma;
 }
