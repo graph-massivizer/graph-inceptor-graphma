@@ -18,4 +18,6 @@ module playground {
     requires magma;
 
     requires data;
+
+    requires org.jgrapht.core;
 }

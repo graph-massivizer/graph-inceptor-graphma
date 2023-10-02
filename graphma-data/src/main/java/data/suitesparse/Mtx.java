@@ -1,25 +1,16 @@
-package playground.parsers;
+package data.suitesparse;
 
-import data.suitesparse.SuiteSparse;
 import magma.adt.control.traversal.Traversal;
 import magma.adt.value.product.Product2;
-import magma.adt.value.product.Product3;
 import magma.control.function.*;
 import magma.control.traversal.Traverser;
-import magma.data.container.Array;
 import magma.value.index.Range;
-import magma.value.tuple.Tuple;
-import magma.value.tuple.Tuple2;
-import magma.value.tuple.Tuple4;
-import magma.value.tuple.Tuple5;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 
 import static java.lang.Math.min;
 
@@ -31,6 +22,7 @@ public enum Mtx {
     static final Fn1.Checked<BufferedReader, Boolean> closeReader = rea -> { rea.close(); return true; };
 
     public static Traverser<Product2<Long, Long>> traverse(Path mtxPth, final Range slice, final long position) {
+//        System.out.println(mtxPth);
         if (Files.notExists(mtxPth) || Range.isEmpty(slice))
             return Traverser.empty();
         return new MtxTraverser(slice, position, mtxPth);
@@ -76,11 +68,11 @@ public enum Mtx {
 
 
 
-            System.out.println("HI: " + Range.hi(slice));
-            System.out.println("LO: " + lo);
-            System.out.println("HI: " + hi);
-            System.out.println("IX: " + ix);
-            System.out.println("SYMMETRY: " + entries);
+//            System.out.println("HI: " + Range.hi(slice));
+//            System.out.println("LO: " + lo);
+//            System.out.println("HI: " + hi);
+//            System.out.println("IX: " + ix);
+//            System.out.println("SYMMETRY: " + entries);
         }
 
         private void initHeader() {
@@ -141,6 +133,7 @@ public enum Mtx {
 
             for (; i < end; i++) {
                 if (chars[i] < '0' || chars[i] > '9') {
+                    System.out.println(String.copyValueOf(chars));
                     throw new NumberFormatException("Invalid character: " + chars[i]);
                 }
                 result = result * 10 + (chars[i] - '0');
@@ -151,6 +144,7 @@ public enum Mtx {
 
         @Override
         public boolean tryNext(Fn1.Consumer<? super Product2<Long, Long>> action) {
+//            System.out.println("TRY NEXT");
             if (null == action) throw new NullPointerException();
             if (ix < hi) {
                 final long[] line = this.line;
@@ -172,6 +166,7 @@ public enum Mtx {
 
         @Override
         public void forNext(Fn1.Consumer<? super Product2<Long, Long>> action) {
+//            System.out.println("FOR NEXT");
             if (null == action) throw new NullPointerException();
             if (this.ix < this.hi) {
                 do {
@@ -194,6 +189,7 @@ public enum Mtx {
 
         @Override
         public Traversal.Status whileNext(Fn1<Traversal.Control, Fn1.Consumer<? super Product2<Long, Long>>> context) {
+//            System.out.println("WHILE NEXT");
             if (null == context) throw new NullPointerException();
             // Hoist boundary checks, state and array accesses.
             if (this.ix < this.hi) {
