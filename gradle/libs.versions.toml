@@ -23,6 +23,7 @@ junit-vintage           = { module = "junit:junit", version.ref = "junit4" }
 assertj                 = { module = "org.assertj:assertj-core", version.ref = "assertj" }
 jcstress-test           = { module = "org.openjdk.jcstress:jcstress-core", version.ref = "jcstress-test" }
 jgrapht-core            = { module = "org.jgrapht:jgrapht-core", version.ref = "jgrapht" }
+jgrapht-io           = { module = "org.jgrapht:jgrapht-io", version.ref = "jgrapht" }
 magma-core              = { module = "magma:magma-core", version.ref = "magma" }
 
 [bundles]
@@ -39,7 +40,8 @@ magmaDependencies = [
 ]
 
 jgraphT = [
-    "jgrapht-core"
+    "jgrapht-core",
+    "jgrapht-io"
 ]
 
 stressTestDependencies = [

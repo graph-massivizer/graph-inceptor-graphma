@@ -2,10 +2,13 @@ package playground.demos;
 
 import data.suitesparse.SSDB;
 import magma.adt.value.product.Product2;
+import magma.control.Option;
 import magma.control.traversal.Traversable;
 import magma.data.sequence.operator.DataSource;
 import magma.data.sequence.operator.Operator;
 import magma.data.sequence.operator.lazy.Filter;
+import magma.data.sequence.operator.lazy.Peek;
+import magma.data.sequence.operator.strict.First;
 import magma.data.sequence.pipeline.Composer;
 import magma.data.sequence.pipeline.Pipe;
 import magma.data.sequence.pipeline.Pipeline;
@@ -20,17 +23,15 @@ public enum GraphPipeline {
 
     interface Graph {
 
-         static <V, E,
+        static <V, E extends DefaultEdge,
                 A extends Traversable<Product2<Long, Long>>,
                 G extends org.jgrapht.Graph<V, E>,
                 P extends Pipeline<?, ?>>
-        Composer<P, Pipeline.Stage<G, P>> graph(Class<? extends E> edgeClass) {
+        Composer<P, Pipeline.Stage<G, P>> graph(Class<E> edgeClass) {
 
             final class ToGraph extends Pipeline.AbstractBase<P> implements Pipeline.Stage<G, P> {
 
-                private ToGraph(final P tail) {
-                    super(tail);
-                }
+                private ToGraph(final P tail) { super(tail); }
 
                 @Override
                 public Pipe<A> apply(final Pipe<G> out) {
@@ -92,9 +93,7 @@ public enum GraphPipeline {
                         }
 
                         @Override
-                        public void open(long count) {
-                            super.open(count);
-                        }
+                        public void open(long count) { super.open(count); }
 
                         @Override
                         public void onNext(final long index, final G next) {

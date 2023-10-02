@@ -20,4 +20,6 @@ module playground {
     requires data;
 
     requires org.jgrapht.core;
+
+    requires org.jgrapht.io;
 }
