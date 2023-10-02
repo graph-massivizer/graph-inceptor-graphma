@@ -22,4 +22,12 @@ module playground {
     requires org.jgrapht.core;
 
     requires org.jgrapht.io;
+
+    requires arrow.memory;
+
+//    uses a arrow.vector;
+
+//    requires
+
+//    requires arrow.memory.netty;
 }

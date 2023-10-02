@@ -18,4 +18,6 @@ module data {
     requires magma;
 
     exports data.suitesparse;
+
+    exports data;
 }

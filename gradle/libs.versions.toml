@@ -7,6 +7,7 @@ junit-platform-suite = "1.10.0"
 jcstress-test = "0.16"
 jgrapht = "1.5.2"
 magma = "0.0.1"
+arrow = "13.0.0"
 
 [libraries]
 junit-bom               = { module = "org.junit:junit-bom", version.ref = "junit" }
@@ -23,7 +24,12 @@ junit-vintage           = { module = "junit:junit", version.ref = "junit4" }
 assertj                 = { module = "org.assertj:assertj-core", version.ref = "assertj" }
 jcstress-test           = { module = "org.openjdk.jcstress:jcstress-core", version.ref = "jcstress-test" }
 jgrapht-core            = { module = "org.jgrapht:jgrapht-core", version.ref = "jgrapht" }
-jgrapht-io           = { module = "org.jgrapht:jgrapht-io", version.ref = "jgrapht" }
+jgrapht-io              = { module = "org.jgrapht:jgrapht-io", version.ref = "jgrapht" }
+arrow-memory-netty      = { module = "org.apache.arrow:arrow-memory-netty", version.ref = "arrow" }
+arrow-memory            = { module = "org.apache.arrow:arrow-memory", version.ref = "arrow" }
+arrow-vector            = { module = "org.apache.arrow:arrow-vector", version.ref = "arrow" }
+flight-core             = { module = "org.apache.arrow:flight-core", version.ref = "arrow" }
+arrow-dataset           = { module = "org.apache.arrow:arrow-dataset", version.ref = "arrow" }
 magma-core              = { module = "magma:magma-core", version.ref = "magma" }
 
 [bundles]
@@ -37,6 +43,14 @@ testDependencies = [
 
 magmaDependencies = [
     "magma-core"
+]
+
+arrowDependencies = [
+    "arrow-vector",
+    "arrow-memory-netty",
+    "arrow-memory",
+    "flight-core",
+    "arrow-dataset"
 ]
 
 jgraphT = [
