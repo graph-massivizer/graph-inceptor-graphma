@@ -97,3 +97,8 @@ We have implemented the following terminal operators:
 # Proposed Architecture for Graph Inceptor 
 
 ![architecture](./doc/inceptor.png)
+
+## Tool Tests
+| Test | Validates Condition | Pass/Failure Criteria | Description |
+| ---- | ------------------- | --------------------- | ----------- |
+|||||
