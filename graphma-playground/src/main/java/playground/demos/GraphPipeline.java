@@ -159,5 +159,11 @@ public enum GraphPipeline {
                 .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
                 .apply(DataSource.of(SSDB.SMALL))
                 .evaluate();
+
+        var description = Graph.print()
+                .compose(Graph.cluster())
+                .compose(Graph.graph(DefaultEdge.class)) // READER
+                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
+                .apply(DataSource.of(SSDB.SMALL));
     }
 }
