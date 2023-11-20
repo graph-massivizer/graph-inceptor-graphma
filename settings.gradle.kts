@@ -39,6 +39,7 @@ val buildParameters = the<BuildParametersExtension>()
 rootProject.name = "graphma"
 
 include("graphma-core")
+include("graphma-data")
 include("graphma-playground")
 
 // check that every subproject has a custom build file  based on the project name

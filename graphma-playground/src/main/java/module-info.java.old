@@ -1,0 +1,33 @@
+// 		╭━━━╮	    ╭╮ ╭━╮╭━╮
+// 		┃╭━╮┃	    ┃┃ ┃┃╰╯┃┃
+// 		┃┃╱╰╋━┳━━┳━━┫╰━┫╭╮╭╮┣━━╮
+// 		┃┃╭━┫╭┫╭╮┃╭╮┃╭╮┃┃┃┃┃┃╭╮┃
+// 		┃╰┻━┃┃┃╭╮┃╰╯┃┃┃┃┃┃┃┃┃╭╮┃
+// 		╰━━━┻╯╰╯╰┫╭━┻╯╰┻╯╰╯╰┻╯╰╯
+// 				 ┃┃
+//
+
+/**
+ * Defines the exposed APIs of the Magma core library.
+ *
+ * <p>This includes APIs for value representations, control flow abstractions,
+ * containers & computation data structures.
+ */
+module playground {
+
+    requires magma;
+
+    requires data;
+
+    requires org.jgrapht.core;
+
+    requires org.jgrapht.io;
+
+    requires arrow.memory;
+
+//    uses a arrow.vector;
+
+//    requires
+
+//    requires arrow.memory.netty;
+}
