@@ -1,9 +1,14 @@
-package playground.sdexample;
+package playground.examples;
 
-public class Container3 implements Runnable {
+import magma.control.function.Fn2;
+import magma.value.Unit;
+
+import java.nio.file.Path;
+
+public class Container3 implements Fn2.Consumer<Path, Unit> {
 
     @Override
-    public void run() {
-        System.out.println("CONTAINER III");
+    public void accept(Path path, Unit unit) {
+
     }
 }

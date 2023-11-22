@@ -2,13 +2,10 @@ package playground.demos;
 
 import data.suitesparse.SSDB;
 import magma.adt.value.product.Product2;
-import magma.control.Option;
 import magma.control.traversal.Traversable;
 import magma.data.sequence.operator.DataSource;
 import magma.data.sequence.operator.Operator;
 import magma.data.sequence.operator.lazy.Filter;
-import magma.data.sequence.operator.lazy.Peek;
-import magma.data.sequence.operator.strict.First;
 import magma.data.sequence.pipeline.Composer;
 import magma.data.sequence.pipeline.Pipe;
 import magma.data.sequence.pipeline.Pipeline;
@@ -21,7 +18,7 @@ import org.jgrapht.graph.DefaultUndirectedGraph;
 public enum GraphPipeline {
     ;
 
-    interface Graph {
+    public interface Graph {
 
         static <V, E extends DefaultEdge,
                 A extends Traversable<Product2<Long, Long>>,

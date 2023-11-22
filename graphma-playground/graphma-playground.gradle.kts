@@ -6,10 +6,19 @@
 // 		╰━━━┻╯╰╯╰┫╭━┻╯╰┻╯╰╯╰┻╯╰╯
 // 				 ┃┃
 //
-
 plugins {
 	id("graphma-build.java-library-conventions")
-	id("graphma-build.publishing-conventions")	
+	id("graphma-build.publishing-conventions")
+	java
+}
+
+tasks.register<Jar>("fatJar") {
+	manifest {
+		attributes["Main-Class"] = "playground.examples.Main"
+	}
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+	from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+	with(tasks.jar.get() as CopySpec)
 }
 
 dependencies {
@@ -17,6 +26,7 @@ dependencies {
 	implementation(libs.bundles.magmaDependencies)
 	implementation(libs.bundles.jgraphT)
 	implementation(libs.bundles.arrowDependencies)
+	implementation(libs.bundles.apacheCommons)
 //	implementation(libs.arrow.dataset)
 //	implementation(libs.arrow.vector)
 //	implementation(libs.arrow.memory)

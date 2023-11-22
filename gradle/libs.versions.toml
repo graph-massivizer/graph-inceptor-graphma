@@ -8,6 +8,7 @@ jcstress-test = "0.16"
 jgrapht = "1.5.2"
 magma = "0.0.1"
 arrow = "13.0.0"
+commons-cli = "1.6.0"
 
 [libraries]
 junit-bom               = { module = "org.junit:junit-bom", version.ref = "junit" }
@@ -31,6 +32,7 @@ arrow-vector            = { module = "org.apache.arrow:arrow-vector", version.re
 flight-core             = { module = "org.apache.arrow:flight-core", version.ref = "arrow" }
 arrow-dataset           = { module = "org.apache.arrow:arrow-dataset", version.ref = "arrow" }
 magma-core              = { module = "magma:magma-core", version.ref = "magma" }
+apache-commons-cli      = { module = "commons-cli:commons-cli", version.ref = "commons-cli" }
 
 [bundles]
 testDependencies = [
@@ -60,6 +62,10 @@ jgraphT = [
 
 stressTestDependencies = [
     "jcstress-test"
+]
+
+apacheCommons = [
+    "apache-commons-cli"
 ]
 
 [plugins]
