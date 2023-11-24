@@ -42,7 +42,14 @@ public class Main {
             }
         }
         else if (cmd.hasOption("c3")) {
-            new Container3().run();
+            if (cmd.getArgs().length == 1) {
+                var srcFile = Path.of(cmd.getArgs()[0]);
+                if (Files.notExists(srcFile)) throw Exceptions.illegalArgument("SRC FILE DOES NOT EXIST");
+                new Container3().accept(srcFile);
+            }
+            else {
+                throw Exceptions.illegalArgument("WE NEED AN INPUT ");
+            }
         }
     }
 }

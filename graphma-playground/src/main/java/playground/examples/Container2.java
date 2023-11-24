@@ -18,12 +18,12 @@ public class Container2 implements Fn2.Consumer<Path, Path> {
     public void accept(Path srcFile, Path tgtFile) {
         System.out.println("RUN CONTAINER II  [MERGE FILES] -- START");
 
-        var graph = new SimpleGraph<Integer, DefaultEdge>(DefaultEdge.class);
-        var map = new HashMap<Integer, Set<Integer>>();
+        var graph = new SimpleGraph<Long, DefaultEdge>(DefaultEdge.class);
+        var map = new HashMap<Long, Set<Long>>();
 
         traverserFile(srcFile).forNext(e -> {
-            int rId = e._1;
-            int pId = e._2;
+            long rId = e._1;
+            long pId = e._2;
             graph.addVertex(rId);
             map.computeIfAbsent(pId, k -> new HashSet<>()).add(rId);
         });
@@ -37,7 +37,7 @@ public class Container2 implements Fn2.Consumer<Path, Path> {
             }
         }
 
-        exporter(tgtFile, "dot");
+        exporter(tgtFile, "graphml").accept(graph);
 
         System.out.println("RUN CONTAINER II  [MERGE FILES] -- DONE");
     }

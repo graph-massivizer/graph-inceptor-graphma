@@ -20,14 +20,14 @@ import static playground.examples.Utils.merge;
 
 public class Container1 implements Fn2.Consumer<Path, Path> {
 
-    static Traverser<Tuple5<Integer, Integer, String, String, Integer>> traverserFile(Path pth) {
+    static Traverser<Tuple5<Long, Long, String, String, Integer>> traverserFile(Path pth) {
         return Fn.checked(() -> newBufferedReader(pth))
                 .map(BufferedReader::lines)
                 .map(lines -> lines.skip(1)
                         .map(line -> line.split(","))
                         .map(ar -> Tuple.of(
-                                Integer.valueOf(ar[0]),
-                                Integer.valueOf(ar[1]),
+                                Long.valueOf(ar[0]),
+                                Long.valueOf(ar[1]),
                                 ar[2],
                                 ar[3],
                                 Integer.valueOf(ar[4])))
