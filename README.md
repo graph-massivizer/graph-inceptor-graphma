@@ -6,6 +6,18 @@ To experience the meaning of this conclusion, we draw a dual to the runtime, whe
 
 The graph inceptor tool is built upon the Magma core library. Magma provides the fundamental building blocks for the creation of pipelines. A pipeline is a stream-like construct that operates on a finite amount of data. Magma's guiding philosophy is to take a "correct-by-construction" approach that leverages the fundamental nature of this universe by providing foundational, generic structures known from functional programming that allow being composed into rich types that encourage the participation of the Java Type Checker.
 
+## Dependencies
+
+### Main Dependencies
+
+* **Java 17 with Preview**:
+* * **Gradle 8**:
+* * * **Kotlin**:
+
+### Java Dependencies
+
+Are listed in graph-inceptor-graphma/gradle/libs.versions.toml and handed to the to the corresponding **.gradle.kts files in the packages.  
+
 ## Magma Repository
 
 The Magma repository is available [here](https://github.com/DTSchroeder/gm-magma). Please note that the Magma project is still in a private repository. Thus, you have to contact [Daniel Thilo Schroeder](mailto:daniel.t.schroeder) with an email that includes your Github username. Furthermore, the entire package is still closed source. This, however, will change in the upcoming month.
