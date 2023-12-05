@@ -18,6 +18,11 @@ The graph inceptor tool is built upon the Magma core library. Magma provides the
 
 Are listed in graph-inceptor-graphma/gradle/libs.versions.toml and handed to the to the corresponding **.gradle.kts files in the packages.  
 
+## Testing
+For Graphma, we have implemented unit tests covering the existing JGraphT BGO operator wrappings. Additionally, we have developed tests for our custom Parquet file parser, further enhancing the project's data processing capabilities.
+
+A special feature of our testing approach is the inclusion of the SuiteSparse dataset through a dedicated Gradle submodule. This submodule is designed as a singleton database, enabling the querying of graph sets with various properties. These properties can be efficiently filtered using Magma's pipeline filters, showcasing the project's advanced data handling and testing capabilities.
+
 ## Magma Repository
 
 The Magma repository is available [here](https://github.com/DTSchroeder/gm-magma). Please note that the Magma project is still in a private repository. Thus, you have to contact [Daniel Thilo Schroeder](mailto:daniel.t.schroeder) with an email that includes your Github username. Furthermore, the entire package is still closed source. This, however, will change in the upcoming month.
