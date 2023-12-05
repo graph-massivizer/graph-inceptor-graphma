@@ -1,4 +1,4 @@
-# Graph Inceptor Tool with Magma Core Library
+# GraphMa
 
 As a reader of the introductory description of this Java library, one can conclude that most of the (development) time is spent in the compile-time universe.
 
@@ -11,8 +11,8 @@ The graph inceptor tool is built upon the Magma core library. Magma provides the
 ### Main Dependencies
 
 * **Java 17 with Preview**:
-* * **Gradle 8**:
-* * * **Kotlin**:
+* **Gradle 8**:
+* **Kotlin**:
 
 ### Java Dependencies
 
