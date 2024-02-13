@@ -46,6 +46,8 @@ out/
 .mtj.tmp/
 # Package Files #
 *.jar
+# however, do not ignore dependencies in localMavenRepo
+!localMavenRepo/**/*.jar
 *.war
 *.nar
 *.ear
