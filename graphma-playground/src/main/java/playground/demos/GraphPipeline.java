@@ -12,6 +12,7 @@ import magma.data.sequence.pipeline.Pipeline;
 import magma.data.sequence.pipeline.TerminalSink;
 import magma.value.Unit;
 import org.jgrapht.alg.clustering.LabelPropagationClustering;
+import org.jgrapht.alg.interfaces.ClusteringAlgorithm;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.DefaultUndirectedGraph;
 
@@ -162,5 +163,6 @@ public enum GraphPipeline {
                 .compose(Graph.graph(DefaultEdge.class)) // READER
                 .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
                 .apply(DataSource.of(SSDB.SMALL));
+
     }
 }
