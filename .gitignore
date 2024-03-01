@@ -66,3 +66,5 @@ gradle/plugins/.gradle/8.2.1/executionHistory/executionHistory.bin
 gradle/plugins/.gradle/8.2.1/executionHistory/executionHistory.lock
 gradle/plugins/.gradle/buildOutputCleanup/buildOutputCleanup.lock
 gradle/plugins/.gradle/buildOutputCleanup/outputFiles.bin
+*.lock
+*.bin
