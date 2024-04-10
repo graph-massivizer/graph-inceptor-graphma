@@ -9,7 +9,7 @@ import magma.data.sequence.pipeline.Pipeline;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.DefaultUndirectedGraph;
 
-public enum MtxToJGraphTGraph {
+public enum MtxToUndirectedGraph {
     // No enum instances are defined as this enum is used as a namespace for the utility methods.
     ;
 
@@ -37,11 +37,11 @@ public enum MtxToJGraphTGraph {
             G extends org.jgrapht.Graph<V, E>,
             P extends Pipeline<?, ?>>
 
-    Composer<P, Pipeline.Stage<G, P>> graph(Class<E> edgeClass) {
+    Composer<P, Pipeline.Stage<G, P>> of(Class<E> edgeClass) {
 
-        final class ToGraph extends Pipeline.AbstractBase<P> implements Pipeline.Stage<G, P> {
+        final class _MtxToUndirectedGraph extends Pipeline.AbstractBase<P> implements Pipeline.Stage<G, P> {
 
-            private ToGraph(final P tail) { super(tail); }
+            private _MtxToUndirectedGraph(final P tail) { super(tail); }
 
             @Override
             public Pipe<A> apply(final Pipe<G> out) {
@@ -60,9 +60,9 @@ public enum MtxToJGraphTGraph {
                     @Override
                     public void onNext(final long index, final A next) {
                         var graph = new DefaultUndirectedGraph<Long, E>(edgeClass);
-                        System.out.println("FILE: " + next);
+//                        System.out.println("FILE: " + next);
                         next.forEach(edge -> {
-                            System.out.println("EDGE: " + edge);
+//                            System.out.println("EDGE: " + edge);
                             graph.addVertex(edge._1());
                             graph.addVertex(edge._2());
                             graph.addEdge(edge._1(), edge._2());
@@ -78,6 +78,6 @@ public enum MtxToJGraphTGraph {
                 return new BuildingStage(out);
             }
         }
-        return ToGraph::new;
+        return _MtxToUndirectedGraph::new;
     }
 }

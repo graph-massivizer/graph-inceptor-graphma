@@ -135,4 +135,44 @@ public enum LabelPropagation {
         }
         return Sink::new;
     }
+
+
+    public static <V, E,
+            G extends LabelPropagationClustering.Clustering<V>,
+            B extends String,
+            P extends Pipeline<?, ?>>
+    Composer<P, Pipeline.Stage<B, P>> textify() {
+
+        final class Cluster extends Pipeline.AbstractBase<P> implements Pipeline.Stage<B, P> {
+            private Cluster(final P tail) {
+                super(tail);
+            }
+
+            @Override
+            public Pipe<?> apply(final Pipe<B> out) {
+                final class LabelStage extends Operator.Transform<G, B> {
+                    private LabelStage(final Pipe<B> out) {
+                        super(out);
+                    }
+
+                    @Override
+                    public void open(long count) { super.open(count); }
+
+                    @Override
+                    public void onNext(final long index, final G next) {
+                        final String[] result = { "" };
+                        next.forEach(cluster -> result[0] += "CLUSTER: " + cluster + "\n");
+                        this.yield((B) result[0]);
+                    }
+
+                    @Override
+                    public void close() {
+                        super.close();
+                    }
+                }
+                return new LabelStage(out);
+            }
+        }
+        return Cluster::new;
+    }
 }
