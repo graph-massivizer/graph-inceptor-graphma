@@ -1,4 +1,4 @@
-package graphma.compute.operator.cluster;
+package graphma.compute.operator.clustering;
 
 import magma.data.sequence.operator.Operator;
 import magma.data.sequence.pipeline.Composer;
