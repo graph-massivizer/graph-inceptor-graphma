@@ -1,0 +1,5 @@
+digraph weighted_graph {
+    A -> B [label="5.0"];
+    B -> C [label="3.2"];
+    C -> A [label="1.1"];
+}

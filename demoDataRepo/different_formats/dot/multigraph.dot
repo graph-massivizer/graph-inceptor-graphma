@@ -1,0 +1,5 @@
+digraph multigraph {
+    A -> B [label="edge1"];
+    A -> B [label="edge2"];
+    B -> C;
+}
