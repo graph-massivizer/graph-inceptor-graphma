@@ -12,7 +12,6 @@ import magma.data.sequence.pipeline.Pipeline;
 import magma.data.sequence.pipeline.TerminalSink;
 import magma.value.Unit;
 import org.jgrapht.alg.clustering.LabelPropagationClustering;
-import org.jgrapht.alg.interfaces.ClusteringAlgorithm;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.DefaultUndirectedGraph;
 
@@ -25,6 +24,7 @@ public enum GraphPipeline {
                 A extends Traversable<Product2<Long, Long>>,
                 G extends org.jgrapht.Graph<V, E>,
                 P extends Pipeline<?, ?>>
+
         Composer<P, Pipeline.Stage<G, P>> graph(Class<E> edgeClass) {
 
             final class ToGraph extends Pipeline.AbstractBase<P> implements Pipeline.Stage<G, P> {
@@ -158,11 +158,11 @@ public enum GraphPipeline {
                 .apply(DataSource.of(SSDB.SMALL))
                 .evaluate();
 
-        var description = Graph.print()
-                .compose(Graph.cluster())
-                .compose(Graph.graph(DefaultEdge.class)) // READER
-                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
-                .apply(DataSource.of(SSDB.SMALL));
+//        var description = Graph.print()
+//                .compose(Graph.cluster())
+//                .compose(Graph.graph(DefaultEdge.class)) // READER
+//                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
+//                .apply(DataSource.of(SSDB.SMALL));
 
     }
 }

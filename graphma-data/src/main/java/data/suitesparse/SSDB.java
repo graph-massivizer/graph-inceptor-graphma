@@ -21,7 +21,7 @@ public enum SSDB implements Traversable<SSDB.MTXFile> {
     final Path DIR;
     final List<MTXFile> files;
 
-    SSDB(String file) { DIR = Config.SUITE_SPARSE.resolve(file); files = files(DIR); }
+    SSDB(String file) { files = files(DIR = Config.SUITE_SPARSE.resolve(file)); }
 
     public Traverser<MTXFile> traverse() {
         return DataSource.of(files).traverse();

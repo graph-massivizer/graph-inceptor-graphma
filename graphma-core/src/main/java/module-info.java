@@ -15,6 +15,9 @@
  */
 module graphma {
 
+    requires org.jgrapht.core;
+    requires magma;
+
     // exports magma.base;
 
     // exports magma.value;
