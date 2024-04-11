@@ -17,8 +17,8 @@ public enum KatzCentrality {
             P extends Pipeline<?, ?>>
     Composer<P, Pipeline.Stage<B, P>> centrality() {
 
-        final class Centrality extends Pipeline.AbstractBase<P> implements Pipeline.Stage<B, P> {
-            private Centrality(final P tail) {
+        final class _KatzCentrality extends Pipeline.AbstractBase<P> implements Pipeline.Stage<B, P> {
+            private _KatzCentrality(final P tail) {
                 super(tail);
             }
 
@@ -48,6 +48,6 @@ public enum KatzCentrality {
                 return new DegreeStage(out);
             }
         }
-        return Centrality::new;
+        return _KatzCentrality::new;
     }
 }

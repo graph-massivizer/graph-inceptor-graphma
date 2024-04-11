@@ -18,8 +18,8 @@ public enum ConnectedComponent {
             P extends Pipeline<?, ?>>
     Composer<P, Pipeline.Stage<B, P>> cluster() {
 
-        final class Cluster extends Pipeline.AbstractBase<P> implements Pipeline.Stage<B, P> {
-            private Cluster(final P tail) {
+        final class _ConnectedComponent extends Pipeline.AbstractBase<P> implements Pipeline.Stage<B, P> {
+            private _ConnectedComponent(final P tail) {
                 super(tail);
             }
 
@@ -50,6 +50,6 @@ public enum ConnectedComponent {
                 return new LabelStage(out);
             }
         }
-        return Cluster::new;
+        return _ConnectedComponent::new;
     }
 }

@@ -52,8 +52,8 @@ public enum LabelPropagation {
             P extends Pipeline<?, ?>>
     Composer<P, Pipeline.Stage<B, P>> cluster() {
 
-        final class Cluster extends Pipeline.AbstractBase<P> implements Pipeline.Stage<B, P> {
-            private Cluster(final P tail) {
+        final class _LabelPropagation extends Pipeline.AbstractBase<P> implements Pipeline.Stage<B, P> {
+            private _LabelPropagation(final P tail) {
                 super(tail);
             }
 
@@ -83,7 +83,7 @@ public enum LabelPropagation {
                 return new LabelStage(out);
             }
         }
-        return Cluster::new;
+        return _LabelPropagation::new;
     }
 
     /**

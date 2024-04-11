@@ -18,8 +18,8 @@ public enum DegreeCentrality {
             P extends Pipeline<?, ?>>
     Composer<P, Pipeline.Stage<B, P>> centrality() {
 
-        final class Centrality extends Pipeline.AbstractBase<P> implements Pipeline.Stage<B, P> {
-            private Centrality(final P tail) {
+        final class _DegreeCentrality extends Pipeline.AbstractBase<P> implements Pipeline.Stage<B, P> {
+            private _DegreeCentrality(final P tail) {
                 super(tail);
             }
 
@@ -53,6 +53,6 @@ public enum DegreeCentrality {
                 return new DegreeStage(out);
             }
         }
-        return Centrality::new;
+        return _DegreeCentrality::new;
     }
 }

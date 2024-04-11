@@ -17,8 +17,8 @@ public enum BipartitePartitioning {
             P extends Pipeline<?, ?>>
     Composer<P, Pipeline.Stage<B, P>> partition() {
 
-        final class Partition extends Pipeline.AbstractBase<P> implements Pipeline.Stage<B, P> {
-            private Partition(final P tail) {
+        final class _BipartitePartitioning extends Pipeline.AbstractBase<P> implements Pipeline.Stage<B, P> {
+            private _BipartitePartitioning(final P tail) {
                 super(tail);
             }
 
@@ -51,6 +51,6 @@ public enum BipartitePartitioning {
                 return new LabelStage(out);
             }
         }
-        return Partition::new;
+        return _BipartitePartitioning::new;
     }
 }

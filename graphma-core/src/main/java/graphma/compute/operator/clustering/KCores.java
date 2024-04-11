@@ -16,8 +16,8 @@ public class KCores {
             P extends Pipeline<?, ?>>
     Composer<P, Pipeline.Stage<B, P>> cluster() {
 
-        final class Cluster extends Pipeline.AbstractBase<P> implements Pipeline.Stage<B, P> {
-            private Cluster(final P tail) {
+        final class _KCores extends Pipeline.AbstractBase<P> implements Pipeline.Stage<B, P> {
+            private _KCores(final P tail) {
                 super(tail);
             }
 
@@ -47,7 +47,7 @@ public class KCores {
                 return new LabelStage(out);
             }
         }
-        return Cluster::new;
+        return _KCores::new;
     }
 
     public static <V, E,

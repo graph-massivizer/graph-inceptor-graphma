@@ -17,8 +17,8 @@ public enum BetweennessCentrality {
             P extends Pipeline<?, ?>>
     Composer<P, Pipeline.Stage<B, P>> centrality() {
 
-        final class Centrality extends Pipeline.AbstractBase<P> implements Pipeline.Stage<B, P> {
-            private Centrality(final P tail) {
+        final class _BetweennessCentrality extends Pipeline.AbstractBase<P> implements Pipeline.Stage<B, P> {
+            private _BetweennessCentrality(final P tail) {
                 super(tail);
             }
 
@@ -48,6 +48,6 @@ public enum BetweennessCentrality {
                 return new LabelStage(out);
             }
         }
-        return Centrality::new;
+        return _BetweennessCentrality::new;
     }
 }

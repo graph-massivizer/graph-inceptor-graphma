@@ -6,7 +6,6 @@ import magma.data.sequence.pipeline.Pipe;
 import magma.data.sequence.pipeline.Pipeline;
 import org.jgrapht.Graph;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public enum ClosenessCentrality {
