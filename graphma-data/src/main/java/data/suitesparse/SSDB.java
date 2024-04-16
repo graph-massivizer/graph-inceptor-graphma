@@ -1,6 +1,7 @@
 package data.suitesparse;
 
 import data.Config;
+import formats.Mtx;
 import magma.adt.value.product.Product2;
 import magma.control.function.Fn;
 import magma.control.function.Fn5;
@@ -27,8 +28,8 @@ public enum SSDB implements Traversable<SSDB.MTXFile> {
         return DataSource.of(files).traverse();
     }
 
-    public record MTXFile(Path pth, int rows, int cols, int lines, int numCol) implements Traversable<Product2<Long, Long>> {
-        public Traverser<Product2<Long, Long>> traverse() {
+    public record MTXFile(Path pth, int rows, int cols, int lines, int numCol) implements Traversable<Mtx.Long2LongEdge> {
+        public Traverser<Mtx.Long2LongEdge> traverse() {
             return Mtx.traverse(pth, Range.of(0, lines), 0);
         }
     }

@@ -1,5 +1,6 @@
 package graphma.compute.operator.transform;
 
+import formats.Mtx;
 import magma.adt.value.product.Product2;
 import magma.control.traversal.Traversable;
 import magma.data.sequence.operator.Operator;
@@ -33,7 +34,7 @@ public enum MtxToUndirectedGraph {
      *         data into a graph.
      */
     public static <V, E extends DefaultEdge,
-            A extends Traversable<Product2<Long, Long>>,
+            A extends Traversable<Mtx.Long2LongEdge>,
             G extends org.jgrapht.Graph<V, E>,
             P extends Pipeline<?, ?>>
 
@@ -63,9 +64,9 @@ public enum MtxToUndirectedGraph {
 //                        System.out.println("FILE: " + next);
                         next.forEach(edge -> {
 //                            System.out.println("EDGE: " + edge);
-                            graph.addVertex(edge._1());
-                            graph.addVertex(edge._2());
-                            graph.addEdge(edge._1(), edge._2());
+                            graph.addVertex(edge.source());
+                            graph.addVertex(edge.target());
+                            graph.addEdge(edge.source(), edge.target());
                         });
                         this.yield((G) graph);
                     }

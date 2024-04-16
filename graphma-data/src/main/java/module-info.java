@@ -19,5 +19,9 @@ module data {
 
     exports data.suitesparse;
 
+    exports data.differenformats;
+
+    exports formats;
+
     exports data;
 }

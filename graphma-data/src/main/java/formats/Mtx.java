@@ -1,4 +1,4 @@
-package data.suitesparse;
+package formats;
 
 import magma.adt.control.traversal.Traversal;
 import magma.adt.value.product.Product2;
@@ -17,18 +17,22 @@ import static java.lang.Math.min;
 public enum Mtx {
     ;
 
+    public interface Long2LongEdge {
+        long source();
+        long target();
+    }
+
     static final Fn2.Checked<BufferedReader, char[], Integer> readBuffer = Reader::read;
     static final Fn1.Checked<Path, BufferedReader> newReader = pth -> new BufferedReader(new FileReader(pth.toFile()));
     static final Fn1.Checked<BufferedReader, Boolean> closeReader = rea -> { rea.close(); return true; };
 
-    public static Traverser<Product2<Long, Long>> traverse(Path mtxPth, final Range slice, final long position) {
-//        System.out.println(mtxPth);
+    public static Traverser<Long2LongEdge> traverse(Path mtxPth, final Range slice, final long position) {
         if (Files.notExists(mtxPth) || Range.isEmpty(slice))
             return Traverser.empty();
         return new MtxTraverser(slice, position, mtxPth);
     }
 
-    static final class MtxTraverser extends Traversal.Control.Context implements Traverser<Product2<Long, Long>> {
+    static final class MtxTraverser extends Traversal.Control.Context implements Traverser<Long2LongEdge> {
         private final MtxTraverser.Cursor cursor;
         private final BufferedReader reader;
         private final long sx;
@@ -56,7 +60,6 @@ public enum Mtx {
             this.numCharsRead = readBuffer.apply(reader, buffer);
             initHeader();
 
-
             for (long i = 0; i < pos; i++) {
                 moveToNextLine();
             }
@@ -64,10 +67,6 @@ public enum Mtx {
             this.lo = Range.lo(slice);
             this.hi = min(Range.hi(slice), entries);
             this.sx = this.ix = pos;
-
-
-
-
 //            System.out.println("HI: " + Range.hi(slice));
 //            System.out.println("LO: " + lo);
 //            System.out.println("HI: " + hi);
@@ -116,9 +115,9 @@ public enum Mtx {
             }
         }
 
-        private final class Cursor implements Product2<Long, Long> {
-            @Override public Long _1() { return line[0]; }
-            @Override public Long _2() { return line[1]; }
+        private final class Cursor implements Long2LongEdge {
+            @Override public long source() { return line[0]; }
+            @Override public long target() { return line[1]; }
         }
 
         private long parseLong(char[] chars, int start, int end) {
@@ -143,7 +142,7 @@ public enum Mtx {
         }
 
         @Override
-        public boolean tryNext(Fn1.Consumer<? super Product2<Long, Long>> action) {
+        public boolean tryNext(Fn1.Consumer<? super Long2LongEdge> action) {
 //            System.out.println("TRY NEXT");
             if (null == action) throw new NullPointerException();
             if (ix < hi) {
@@ -165,7 +164,7 @@ public enum Mtx {
         }
 
         @Override
-        public void forNext(Fn1.Consumer<? super Product2<Long, Long>> action) {
+        public void forNext(Fn1.Consumer<? super Long2LongEdge> action) {
 //            System.out.println("FOR NEXT");
             if (null == action) throw new NullPointerException();
             if (this.ix < this.hi) {
@@ -188,7 +187,7 @@ public enum Mtx {
         }
 
         @Override
-        public Traversal.Status whileNext(Fn1<Traversal.Control, Fn1.Consumer<? super Product2<Long, Long>>> context) {
+        public Traversal.Status whileNext(Fn1<Traversal.Control, Fn1.Consumer<? super Long2LongEdge>> context) {
 //            System.out.println("WHILE NEXT");
             if (null == context) throw new NullPointerException();
             // Hoist boundary checks, state and array accesses.
