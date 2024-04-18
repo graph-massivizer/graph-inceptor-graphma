@@ -65,11 +65,10 @@ public enum Dot {
         private int bx;
 
         private boolean isDirected;
-
-        //        private final long[] line = new long[2];
         private final String[] line = new String[2];
 
         private DotTraverser(final Range slice, final long pos, final Path path) {
+            System.out.println("CONSTRUCTOR");
             this.cursor = new DotTraverser.Cursor();
             this.reader = newReader.apply(path);
             this.buffer = new char[8192];
@@ -131,7 +130,7 @@ public enum Dot {
 
         @Override
         public boolean tryNext(Fn1.Consumer<? super Product2<String, String>> action) {
-            System.out.println("FOR NEXT");
+            System.out.println("TRY NEXT");
             if (null == action) throw new NullPointerException("Action must not be null.");
             debugCharArray(buffer, bx);
             System.out.println("IX: " + ix);
@@ -210,6 +209,7 @@ public enum Dot {
 
         @Override
         public Traversal.Status whileNext(Fn1<Traversal.Control, Fn1.Consumer<? super Product2<String, String>>> context) {
+            System.out.println("WHILE NEXT");
             if (context == null) throw new NullPointerException("Context must not be null.");
 
             Pattern edgePattern = isDirected

@@ -6,6 +6,7 @@ import graphma.compute.operator.clustering.KCores;
 import graphma.compute.operator.clustering.LabelPropagation;
 import graphma.compute.operator.transform.GraphToSimpleGraph;
 import graphma.compute.operator.transform.MtxToUndirectedGraph;
+import magma.data.Seq;
 import magma.data.sequence.operator.DataSource;
 import magma.data.sequence.operator.lazy.Filter;
 import magma.data.sequence.operator.lazy.Map;
