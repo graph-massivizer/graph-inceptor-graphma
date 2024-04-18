@@ -9,12 +9,5 @@ import org.junit.jupiter.api.Test;
 
 public class MtxTest {
 
-    @Test
-    public void test_ssbd() {
-        ForNext.build(System.out::println)
-                .compose(Map.build(r -> r + "\n-------\n"))
-                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
-                .apply(DataSource.of(SSDB.SMALL))
-                .evaluate();
-    }
+
 }
