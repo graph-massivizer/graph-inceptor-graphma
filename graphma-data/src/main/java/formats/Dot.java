@@ -75,6 +75,7 @@ public enum Dot {
             this.buffer = new char[8192];
             this.bx = 0;
 
+            // TODO this reads the entire file once before we actually start parsing. Not very performant
             try {
                 this.entries = countLines(path);
             } catch (IOException e) {
@@ -189,7 +190,6 @@ public enum Dot {
                     if (numCharsRead == -1) break;  // End of file reached
                     bx = 0;  // Reset buffer index
                     break;
-
                 }
 
                 // Read the line from the buffer
