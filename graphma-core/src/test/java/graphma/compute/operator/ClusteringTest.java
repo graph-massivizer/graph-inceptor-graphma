@@ -1,6 +1,7 @@
 package graphma.compute.operator;
 
 import data.suitesparse.SSDB;
+import formats.Mtx;
 import graphma.compute.operator.clustering.ConnectedComponent;
 import graphma.compute.operator.clustering.KCores;
 import graphma.compute.operator.clustering.LabelPropagation;
@@ -24,7 +25,7 @@ final class ClusteringTest {
                 .compose(LabelPropagation.textify())
                 .compose(LabelPropagation.cluster())
                 .compose(MtxToUndirectedGraph.of(DefaultEdge.class))
-                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
+                .compose(Filter.build((Mtx.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
                 .apply(DataSource.of(SSDB.SMALL))
                 .evaluate();
     }
@@ -38,7 +39,7 @@ final class ClusteringTest {
                 .compose(GraphToSimpleGraph.of(DefaultEdge.class))
                 .compose(Filter.build((Graph<?, ?> g) -> !Utils.containsLoop(g)))
                 .compose(MtxToUndirectedGraph.of(DefaultEdge.class))
-                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
+                .compose(Filter.build((Mtx.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
                 .apply(DataSource.of(SSDB.SMALL))
                 .evaluate();
     }
@@ -49,7 +50,7 @@ final class ClusteringTest {
                 .compose(Map.build(r -> r + "\n--------\n"))
                 .compose(ConnectedComponent.cluster())
                 .compose(MtxToUndirectedGraph.of(DefaultEdge.class))
-                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
+                .compose(Filter.build((Mtx.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
                 .apply(DataSource.of(SSDB.SMALL))
                 .evaluate();
     }

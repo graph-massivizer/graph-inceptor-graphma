@@ -1,6 +1,7 @@
 package graphma.compute.operator;
 
 import data.suitesparse.SSDB;
+import formats.Mtx;
 import graphma.compute.operator.transform.GraphToSimpleGraph;
 import graphma.compute.operator.transform.MtxToUndirectedGraph;
 import magma.data.sequence.operator.DataSource;
@@ -19,7 +20,7 @@ public class TransformTest {
         ForNext.build(System.out::println)
                 .compose(Map.build(r -> r.toString() + "\n" + "--------\n"))
                 .compose(MtxToUndirectedGraph.of(DefaultEdge.class))
-                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
+                .compose(Filter.build((Mtx.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
                 .apply(DataSource.of(SSDB.SMALL))
                 .evaluate();
     }
@@ -31,7 +32,7 @@ public class TransformTest {
                 .compose(GraphToSimpleGraph.of(DefaultEdge.class))
                 .compose(Filter.build((Graph<?, ?> g) -> !Utils.containsLoop(g)))
                 .compose(MtxToUndirectedGraph.of(DefaultEdge.class))
-                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
+                .compose(Filter.build((Mtx.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
                 .apply(DataSource.of(SSDB.SMALL))
                 .evaluate();
     }

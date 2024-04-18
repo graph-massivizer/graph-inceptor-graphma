@@ -1,6 +1,7 @@
 package graphma.compute.operator;
 
 import data.suitesparse.SSDB;
+import formats.Mtx;
 import graphma.compute.operator.partitioning.BipartitePartitioning;
 import graphma.compute.operator.transform.MtxToUndirectedGraph;
 import magma.data.sequence.operator.DataSource;
@@ -18,7 +19,7 @@ public class PartitioningTest {
                 .compose(Map.build(r -> r + "--------\n"))
                 .compose(BipartitePartitioning.partition())
                 .compose(MtxToUndirectedGraph.of(DefaultEdge.class))
-                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
+                .compose(Filter.build((Mtx.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
                 .apply(DataSource.of(SSDB.SMALL))
                 .evaluate();
     }

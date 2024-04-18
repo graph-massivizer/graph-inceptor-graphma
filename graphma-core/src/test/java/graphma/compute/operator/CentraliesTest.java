@@ -1,6 +1,7 @@
 package graphma.compute.operator;
 
 import data.suitesparse.SSDB;
+import formats.Mtx;
 import graphma.compute.operator.centralities.*;
 import graphma.compute.operator.transform.MtxToUndirectedGraph;
 import magma.data.sequence.operator.DataSource;
@@ -18,7 +19,7 @@ public class CentraliesTest {
                 .compose(Map.build(r -> r + "\n-------\n"))
                 .compose(BetweennessCentrality.centrality())
                 .compose(MtxToUndirectedGraph.of(DefaultEdge.class))
-                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
+                .compose(Filter.build((Mtx.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
                 .apply(DataSource.of(SSDB.SMALL))
                 .evaluate();
     }
@@ -29,7 +30,7 @@ public class CentraliesTest {
                 .compose(Map.build(r -> r + "\n-------\n"))
                 .compose(DegreeCentrality.centrality())
                 .compose(MtxToUndirectedGraph.of(DefaultEdge.class))
-                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
+                .compose(Filter.build((Mtx.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
                 .apply(DataSource.of(SSDB.SMALL))
                 .evaluate();
     }
@@ -40,7 +41,7 @@ public class CentraliesTest {
                 .compose(Map.build(r -> r + "-\n-------\n"))
                 .compose(ClosenessCentrality.centrality())
                 .compose(MtxToUndirectedGraph.of(DefaultEdge.class))
-                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
+                .compose(Filter.build((Mtx.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
                 .apply(DataSource.of(SSDB.SMALL))
                 .evaluate();
     }
@@ -51,7 +52,7 @@ public class CentraliesTest {
                 .compose(Map.build(r -> r + "\n-------\n"))
                 .compose(ClusteringCoefficient.centrality())
                 .compose(MtxToUndirectedGraph.of(DefaultEdge.class))
-                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
+                .compose(Filter.build((Mtx.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
                 .apply(DataSource.of(SSDB.SMALL))
                 .evaluate();
     }
@@ -62,7 +63,7 @@ public class CentraliesTest {
                 .compose(Map.build(r -> r + "\n-------\n"))
                 .compose(EigenvectorCentrality.centrality())
                 .compose(MtxToUndirectedGraph.of(DefaultEdge.class))
-                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
+                .compose(Filter.build((Mtx.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
                 .apply(DataSource.of(SSDB.SMALL))
                 .evaluate();
     }
@@ -73,7 +74,7 @@ public class CentraliesTest {
                 .compose(Map.build(r -> r + "\n-------\n"))
                 .compose(KatzCentrality.centrality())
                 .compose(MtxToUndirectedGraph.of(DefaultEdge.class))
-                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
+                .compose(Filter.build((Mtx.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
                 .apply(DataSource.of(SSDB.SMALL))
                 .evaluate();
     }
@@ -84,7 +85,7 @@ public class CentraliesTest {
                 .compose(Map.build(r -> r + "\n-------\n"))
                 .compose(PageRank.centrality())
                 .compose(MtxToUndirectedGraph.of(DefaultEdge.class))
-                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
+                .compose(Filter.build((Mtx.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
                 .apply(DataSource.of(SSDB.SMALL))
                 .evaluate();
     }
