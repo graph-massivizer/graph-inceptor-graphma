@@ -6,7 +6,7 @@ junit4 = "4.13.2"
 junit-platform-suite = "1.10.0"
 jcstress-test = "0.16"
 jgrapht = "1.5.2"
-magma = "0.0.1"
+magma = "0.0.2"
 arrow = "13.0.0"
 commons-cli = "1.6.0"
 
