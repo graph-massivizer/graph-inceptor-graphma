@@ -2,13 +2,11 @@ package data.suitesparse;
 
 import data.Config;
 import formats.Mtx;
-import magma.adt.value.product.Product2;
 import magma.control.function.Fn;
 import magma.control.function.Fn5;
 import magma.control.traversal.Traversable;
 import magma.control.traversal.Traverser;
 import magma.data.sequence.operator.DataSource;
-import magma.value.index.Range;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,27 +14,21 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
-public enum SSDB implements Traversable<SSDB.MTXFile> {
+public enum SSDB implements Traversable<Mtx.MTXFile> {
     SMALL("small_graphs");
 
     final Path DIR;
-    final List<MTXFile> files;
+    final List<Mtx.MTXFile> files;
 
     SSDB(String file) { files = files(DIR = Config.SUITE_SPARSE.resolve(file)); }
 
-    public Traverser<MTXFile> traverse() {
+    public Traverser<Mtx.MTXFile> traverse() {
         return DataSource.of(files).traverse();
     }
 
-    public record MTXFile(Path pth, int rows, int cols, int lines, int numCol) implements Traversable<Mtx.Long2LongEdge> {
-        public Traverser<Mtx.Long2LongEdge> traverse() {
-            return Mtx.traverse(pth, Range.of(0, lines), 0);
-        }
-    }
-
-    static MTXFile parseHeader(Path path) {
+    static Mtx.MTXFile parseHeader(Path path) {
         var reader = Fn.checked(() -> Files.newBufferedReader(path)).apply();
-        Fn5<Path, Integer, Integer, Integer, Integer, MTXFile> factory = MTXFile::new;
+        Fn5<Path, Integer, Integer, Integer, Integer, Mtx.MTXFile> factory = Mtx.MTXFile::new;
         String line;
         do {
             line = Fn.checked(reader::readLine).apply();
@@ -51,7 +43,7 @@ public enum SSDB implements Traversable<SSDB.MTXFile> {
         return mtx;
     }
 
-    static List<MTXFile> files(Path root) {
+    static List<Mtx.MTXFile> files(Path root) {
         return Fn.checked(() -> Files.walk(root)).apply()
                 .filter(Files::isRegularFile)
                 .filter(p -> p.toString().endsWith(".mtx"))

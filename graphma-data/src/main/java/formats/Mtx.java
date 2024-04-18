@@ -3,6 +3,7 @@ package formats;
 import magma.adt.control.traversal.Traversal;
 import magma.adt.value.product.Product2;
 import magma.control.function.*;
+import magma.control.traversal.Traversable;
 import magma.control.traversal.Traverser;
 import magma.value.index.Range;
 
@@ -30,6 +31,12 @@ public enum Mtx {
         if (Files.notExists(mtxPth) || Range.isEmpty(slice))
             return Traverser.empty();
         return new MtxTraverser(slice, position, mtxPth);
+    }
+
+    public record MTXFile(Path pth, int rows, int cols, int lines, int numCol) implements Traversable<Long2LongEdge> {
+        public Traverser<Mtx.Long2LongEdge> traverse() {
+            return Mtx.traverse(pth, Range.of(0, lines), 0);
+        }
     }
 
     static final class MtxTraverser extends Traversal.Control.Context implements Traverser<Long2LongEdge> {
