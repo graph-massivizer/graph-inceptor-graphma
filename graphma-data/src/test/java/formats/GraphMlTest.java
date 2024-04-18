@@ -8,11 +8,11 @@ import java.util.Objects;
 
 import static data.Config.GRAPH_FORMATS;
 
-public class GmlTest {
+public class GraphMlTest {
 
-    private static final DataSource<Gml.String2StringEdge> DIRECTED_SOURCE =
+    private static final DataSource<GraphML.String2StringEdge> DIRECTED_SOURCE =
             DataSource.of(
-                    new Gml.GmlFile(GRAPH_FORMATS.resolve("gml").resolve("directed_graph.gml"),
+                    new GraphML.GraphMLFile(GRAPH_FORMATS.resolve("graphml").resolve("directed_graph.graphml"),
                             9999,
                             9999,
                             9999,
@@ -29,7 +29,7 @@ public class GmlTest {
     public void test_dot_format_WhileNext() {
         Seq.of(DataSource.of(DIRECTED_SOURCE))
                 .peek(e -> System.out.println(e.source() + " --> " + e.target()))
-                .anyMatch(edge -> Objects.equals(edge.source(), "A"));
+                .anyMatch(edge -> Objects.equals(edge.source(), "Z"));
     }
 
     @Test
