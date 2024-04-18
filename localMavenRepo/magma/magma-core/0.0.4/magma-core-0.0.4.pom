@@ -9,7 +9,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>magma</groupId>
   <artifactId>magma-core</artifactId>
-  <version>0.0.2</version>
+  <version>0.0.4</version>
   <name>magma</name>
   <description>generic, functional core foundation for Java</description>
   <url>https://github.com/TobiasHerb/magma</url>
