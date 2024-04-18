@@ -22,26 +22,19 @@ public class DotTest {
                 .evaluate();
     }
 
-
-    public static void main(String[] args) {
-        var ds = DataSource.of("A", "B", "C", "D", "E");
-        Seq.of(ds).forEach(System.out::println);
+    @Test
+    public void test_dot_format_WhileNext() {
+        var pth = GRAPH_FORMATS.resolve("dot").resolve("directed_graph.dot");
+        var dotFile = new Dot.DotFile(pth, 9999, 9999, 9999, 9999);
+        Seq.of(DataSource.of(dotFile))
+                .anyMatch(edge -> Objects.equals(edge.source(), "A"));
     }
 
     @Test
-    public void test_dot_format_WhileNext() {
-        var ds = DataSource.of("A", "B", "C", "D", "E");
-        Seq.of(ds).forEach(System.out::println);
-//        Seq.of(ds)
-//                .peek(s -> System.out.println(s))
-//                .anyMatch(e -> Objects.equals(e, "D"));
-//        var pth = GRAPH_FORMATS.resolve("dot").resolve("directed_graph.dot");
-//        Dot.DotFile dotFile = new Dot.DotFile(pth, 9999, 9999, 9999, 9999);
-//        boolean r = Seq.of(DataSource.of(dotFile))
-////                .forNext(e -> System.out.println(e));
-////                .peek(System.out::println)
-//                .anyMatch(edge -> Objects.equals(edge._1(), "A"));
-
-//        System.out.println(res);
+    public void test_dot_format_TryNext() {
+        var pth = GRAPH_FORMATS.resolve("dot").resolve("directed_graph.dot");
+        var dotFile = new Dot.DotFile(pth, 9999, 9999, 9999, 9999);
+        var traverser = dotFile.traverse();
+        while (traverser.tryNext(e -> System.out.println(e.source() + " --> " + e.target())));
     }
 }

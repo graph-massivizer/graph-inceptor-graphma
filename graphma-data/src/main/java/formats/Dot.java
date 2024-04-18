@@ -1,13 +1,10 @@
 package formats;
 
 import magma.adt.control.traversal.Traversal;
-import magma.adt.value.product.Product2;
 import magma.control.function.Fn1;
 import magma.control.function.Fn2;
 import magma.control.traversal.Traversable;
 import magma.control.traversal.Traverser;
-import magma.data.sequence.operator.DataSource;
-import magma.data.sequence.operator.strict.ForNext;
 import magma.value.index.Range;
 
 import java.io.BufferedReader;
@@ -22,21 +19,25 @@ import java.nio.file.StandardOpenOption;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static data.Config.GRAPH_FORMATS;
 import static java.lang.Math.min;
 
 public enum Dot {
     ;
 
-    public static Traverser<Product2<String, String>> traverse(Path mtxPth, final Range slice, final long position) {
+    public interface String2StringEdge {
+        String source();
+        String target();
+    }
+
+    public static Traverser<String2StringEdge> traverse(Path mtxPth, final Range slice, final long position) {
         if (Files.notExists(mtxPth) || Range.isEmpty(slice))
             return Traverser.empty();
         return new Dot.DotTraverser(slice, position, mtxPth);
     }
 
     public record DotFile(Path pth, int rows, int cols, int lines,
-                          int numCol) implements Traversable<Product2<String, String>> {
-        public Traverser<Product2<String, String>> traverse() {
+                          int numCol) implements Traversable<String2StringEdge> {
+        public Traverser<String2StringEdge> traverse() {
             return Dot.traverse(pth, Range.of(0, lines), 0);
         }
     }
@@ -50,7 +51,7 @@ public enum Dot {
 
     // TODO Memory mapped files for performance
     // TODO change cursor
-    static final class DotTraverser extends Traversal.Control.Context implements Traverser<Product2<String, String>> {
+    static final class DotTraverser extends Traversal.Control.Context implements Traverser<String2StringEdge> {
         private final DotTraverser.Cursor cursor;
         private final BufferedReader reader;
         private final long sx;
@@ -88,11 +89,12 @@ public enum Dot {
             this.lo = Range.lo(slice);
             this.hi = min(Range.hi(slice), entries);
             this.sx = this.ix = pos;
-            System.out.println("HI: " + Range.hi(slice));
-            System.out.println("LO: " + lo);
-            System.out.println("HI: " + hi);
-            System.out.println("IX: " + ix);
-            System.out.println("SYMMETRY: " + entries);
+//            TODO DEBUG STUFF, DELETE!
+//            System.out.println("HI: " + Range.hi(slice));
+//            System.out.println("LO: " + lo);
+//            System.out.println("HI: " + hi);
+//            System.out.println("IX: " + ix);
+//            System.out.println("SYMMETRY: " + entries);
         }
 
 
@@ -118,8 +120,9 @@ public enum Dot {
             }
 
             // In case the first line or relevant info is longer than the buffer size:
+            // TODO this is somehow weird. The condition IS NOT ALWAYS TRUE!
             if (bx >= numCharsRead) {
-                System.out.println("TTTTTTTT");
+//                System.out.println("TTTTTTTT");
                 numCharsRead = readBuffer.apply(reader, buffer);
                 bx = 0; // Reset buffer index
                 if (numCharsRead != -1) { // Check if there's more data to read
@@ -129,12 +132,13 @@ public enum Dot {
         }
 
         @Override
-        public boolean tryNext(Fn1.Consumer<? super Product2<String, String>> action) {
+        public boolean tryNext(Fn1.Consumer<? super String2StringEdge> action) {
             System.out.println("TRY NEXT");
             if (null == action) throw new NullPointerException("Action must not be null.");
-            debugCharArray(buffer, bx);
-            System.out.println("IX: " + ix);
-            System.out.println("HI: " + ix);
+//            TODO DEBUG STUFF, DELETE!
+//            debugCharArray(buffer, bx);
+//            System.out.println("IX: " + ix);
+//            System.out.println("HI: " + ix);
 
             Pattern edgePattern = isDirected
                     ? Pattern.compile("\\s*(\\S+)\\s*->\\s*(\\S+)\\s*;")
@@ -171,7 +175,7 @@ public enum Dot {
         }
 
         @Override
-        public void forNext(Fn1.Consumer<? super Product2<String, String>> action) {
+        public void forNext(Fn1.Consumer<? super String2StringEdge> action) {
             System.out.println("FOR NEXT");
             if (action == null) throw new NullPointerException("Action must not be null.");
 
@@ -208,7 +212,7 @@ public enum Dot {
         }
 
         @Override
-        public Traversal.Status whileNext(Fn1<Traversal.Control, Fn1.Consumer<? super Product2<String, String>>> context) {
+        public Traversal.Status whileNext(Fn1<Traversal.Control, Fn1.Consumer<? super String2StringEdge>> context) {
             System.out.println("WHILE NEXT");
             if (context == null) throw new NullPointerException("Context must not be null.");
 
@@ -217,7 +221,7 @@ public enum Dot {
                     : Pattern.compile("\\s*(\\S+)\\s*--\\s*(\\S+)\\s*;");
 
             // Prepare the action from the context
-            Fn1.Consumer<? super Product2<String, String>> action = bind(context);
+            Fn1.Consumer<? super String2StringEdge> action = bind(context);
 
             while (ix < hi) {
                 if (bx >= numCharsRead) {  // If buffer is exhausted, reload it
@@ -258,21 +262,21 @@ public enum Dot {
             return Traversal.Status.DONE;  // All data processed or range exceeded
         }
 
-        private final class Cursor implements Product2<String, String> {
+        private final class Cursor implements String2StringEdge {
             @Override
-            public String _1() {
+            public String source() {
                 return line[0];
             }
 
             @Override
-            public String _2() {
+            public String target() {
                 return line[1];
             }
         }
     }
 
     // TODO integrate
-    public static long countLines(Path path) throws IOException {
+    private static long countLines(Path path) throws IOException {
         try (FileChannel fileChannel = (FileChannel) Files.newByteChannel(path, StandardOpenOption.READ)) {
             MappedByteBuffer buffer = fileChannel.map(FileChannel.MapMode.READ_ONLY, 0, fileChannel.size());
             long lines = 0;
