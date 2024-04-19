@@ -13,11 +13,9 @@
  * <p>This includes APIs for value representations, control flow abstractions,
  * containers & computation data structures.
  */
-module graphma {
+module graphma.bench {
 
-    requires org.jgrapht.core;
-
-    requires magma;
+    requires jmh.core;
 
     requires data;
 }

@@ -9,6 +9,7 @@ jgrapht = "1.5.2"
 magma = "0.0.4"
 arrow = "13.0.0"
 commons-cli = "1.6.0"
+jmh = "1.37"
 
 [libraries]
 junit-bom               = { module = "org.junit:junit-bom", version.ref = "junit" }
@@ -33,6 +34,8 @@ flight-core             = { module = "org.apache.arrow:flight-core", version.ref
 arrow-dataset           = { module = "org.apache.arrow:arrow-dataset", version.ref = "arrow" }
 magma-core              = { module = "magma:magma-core", version.ref = "magma" }
 apache-commons-cli      = { module = "commons-cli:commons-cli", version.ref = "commons-cli" }
+jmh-core                = { module = "org.openjdk.jmh:jmh-core", version.ref = "jmh" }
+jmh-annotations         = { module = "org.openjdk.jmh:jmh-generator-annprocess", version.ref = "jmh" }
 
 [bundles]
 testDependencies = [
@@ -58,6 +61,11 @@ arrowDependencies = [
 jgraphT = [
     "jgrapht-core",
     "jgrapht-io"
+]
+
+jmh = [
+    "jmh-core",
+    "jmh-annotations"
 ]
 
 stressTestDependencies = [
