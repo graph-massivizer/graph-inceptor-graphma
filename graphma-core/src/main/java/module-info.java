@@ -13,11 +13,11 @@
  * <p>This includes APIs for value representations, control flow abstractions,
  * containers & computation data structures.
  */
-module graphma {
+module graphma.core {
 
     requires org.jgrapht.core;
 
     requires magma;
 
-    requires data;
+    requires graphma.data;
 }

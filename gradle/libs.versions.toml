@@ -7,7 +7,7 @@ junit-platform-suite = "1.10.0"
 jcstress-test = "0.16"
 jgrapht = "1.5.2"
 magma = "0.0.4"
-arrow = "13.0.0"
+arrow = "15.0.2"
 commons-cli = "1.6.0"
 jmh = "1.37"
 
@@ -38,7 +38,7 @@ jmh-core                = { module = "org.openjdk.jmh:jmh-core", version.ref = "
 jmh-annotations         = { module = "org.openjdk.jmh:jmh-generator-annprocess", version.ref = "jmh" }
 
 [bundles]
-testDependencies = [
+test = [
     "junit-jupiter-api",
     "junit-jupiter-engine",
     "junit-jupiter-params",
@@ -46,16 +46,8 @@ testDependencies = [
     "assertj",
 ]
 
-magmaDependencies = [
+magma = [
     "magma-core"
-]
-
-arrowDependencies = [
-    "arrow-vector",
-    "arrow-memory-netty",
-    "arrow-memory",
-    "flight-core",
-    "arrow-dataset"
 ]
 
 jgraphT = [
@@ -68,12 +60,20 @@ jmh = [
     "jmh-annotations"
 ]
 
-stressTestDependencies = [
+stressTest = [
     "jcstress-test"
 ]
 
 apacheCommons = [
     "apache-commons-cli"
+]
+
+apacheArrow = [
+    "arrow-vector",
+    "arrow-memory-netty",
+    "arrow-memory",
+    "flight-core",
+    "arrow-dataset"
 ]
 
 [plugins]

@@ -8,26 +8,23 @@
 //
 
 /**
- * Defines the exposed APIs of the Magma core library.
  *
- * <p>This includes APIs for value representations, control flow abstractions,
- * containers & computation data structures.
  */
-module playground {
+module graphma.playground {
 
     requires magma;
 
-    requires data;
+    requires graphma.data;
 
     requires org.jgrapht.core;
 
     requires org.jgrapht.io;
 
-    requires arrow.memory;
+    requires org.apache.commons.cli;
 
-//    uses a arrow.vector;
+    requires arrow.memory.netty;
 
-//    requires
+    requires arrow.memory.core;
 
-//    requires arrow.memory.netty;
+    requires arrow.vector;
 }
