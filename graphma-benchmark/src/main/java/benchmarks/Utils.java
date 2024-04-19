@@ -1,4 +1,4 @@
-package parser;
+package benchmarks;
 
 import magma.control.exception.Exceptions;
 

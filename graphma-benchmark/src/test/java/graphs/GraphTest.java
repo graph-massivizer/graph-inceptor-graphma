@@ -1,6 +1,5 @@
 package graphs;
 
-import graphs.StaticGraph;
 import org.junit.jupiter.api.Test;
 
 final class GraphTest {
@@ -16,7 +15,7 @@ final class GraphTest {
         };
 
         // Create the graph
-        StaticGraph graph = new StaticGraph(4, edges);
+        StaticGraphArray graph = new StaticGraphArray(4, edges);
 
         // Output the graph
         System.out.println("Graph representation:\n" + graph);

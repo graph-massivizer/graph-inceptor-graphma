@@ -1,4 +1,4 @@
-package parser;
+package benchmarks;
 
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.results.format.ResultFormatType;
@@ -7,8 +7,6 @@ import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 import java.util.concurrent.TimeUnit;
-
-import static parser.Utils.findbenchmarkResultPath;
 
 @State(Scope.Benchmark)
 @Warmup(iterations = 1, time = 1, timeUnit = TimeUnit.SECONDS)
@@ -28,7 +26,7 @@ public class ExampleBenchmark {
     public static void main(String[] args) throws Exception {
         Options opt = new OptionsBuilder()
                 .include(ExampleBenchmark.class.getSimpleName())
-                .result(findbenchmarkResultPath().resolve("results.json").toString())
+                .result(Utils.findbenchmarkResultPath().resolve("example.json").toString())
                 .resultFormat(ResultFormatType.JSON)
                 .build();
         new Runner(opt).run();

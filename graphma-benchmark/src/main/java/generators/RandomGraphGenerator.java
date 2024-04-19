@@ -1,10 +1,6 @@
 package generators;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class RandomGraphGenerator {
     private int numVertices;
@@ -62,6 +58,15 @@ public class RandomGraphGenerator {
 
     public int[][] getAdjacencyList() {
         return adjArray;
+    }
+
+    // New method to get the adjacency list as a Map for StaticGraphMap usage
+    public Map<Integer, List<Integer>> getAdjacencyListMap() {
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        for (int i = 0; i < adjacencyList.size(); i++) {
+            map.put(i, new ArrayList<>(adjacencyList.get(i)));
+        }
+        return map;
     }
 
     public int getNumVertices() {
