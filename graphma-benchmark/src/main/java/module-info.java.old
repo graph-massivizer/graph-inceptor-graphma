@@ -17,5 +17,7 @@ module graphma.bench {
 
     requires jmh.core;
 
-    requires data;
+    requires graphma.data;
+
+    requires graphma.core;
 }
