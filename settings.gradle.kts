@@ -39,6 +39,7 @@ val buildParameters = the<BuildParametersExtension>()
 rootProject.name = "graphma"
 
 include("graphma-core")
+include("graphma-benchmark")
 include("graphma-data")
 include("graphma-playground")
 
