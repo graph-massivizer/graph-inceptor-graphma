@@ -16,12 +16,12 @@ public enum GraphToFile {
     ;
 
     public static void main(String[] args) {
-        ForNext.build((Graph<Long, DefaultEdge> graph) -> exporter(TEMP.resolve("test.graphml"), "graphml").accept(graph))
-                .compose(Peek.build(System.out::println))
-                .compose(GraphPipeline.Graph.graph(DefaultEdge.class))
-                .compose(Take.build(1))
-                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
-                .apply(DataSource.of(SSDB.SMALL))
-                .evaluate();
+//        ForNext.build((Graph<Long, DefaultEdge> graph) -> exporter(TEMP.resolve("test.graphml"), "graphml").accept(graph))
+//                .compose(Peek.build(System.out::println))
+//                .compose(GraphPipeline.Graph.graph(DefaultEdge.class))
+//                .compose(Take.build(1))
+//                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
+//                .apply(DataSource.of(SSDB.SMALL))
+//                .evaluate();
     }
 }

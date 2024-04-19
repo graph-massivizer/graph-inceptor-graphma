@@ -151,12 +151,15 @@ public enum GraphPipeline {
     }
 
     public static void main(String[] args) {
-        Graph.print()
-                .compose(Graph.cluster())
-                .compose(Graph.graph(DefaultEdge.class))
-                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
-                .apply(DataSource.of(SSDB.SMALL))
-                .evaluate();
+
+        System.out.println("HELLO WORLD");
+
+//        Graph.print()
+//                .compose(Graph.cluster())
+//                .compose(Graph.graph(DefaultEdge.class))
+//                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
+//                .apply(DataSource.of(SSDB.SMALL))
+//                .evaluate();
 
 //        var description = Graph.print()
 //                .compose(Graph.cluster())

@@ -13,11 +13,11 @@ plugins {
 }
 
 dependencies {
-	testImplementation(libs.bundles.testDependencies)
+	testImplementation(libs.bundles.test)
 }
 
 dependencies {
 	implementation(libs.bundles.jgraphT)
-	implementation(libs.bundles.magmaDependencies)
+	implementation(libs.bundles.magma)
 	implementation(project(":graphma-data"))
 }
