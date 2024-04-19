@@ -30,6 +30,17 @@ public class DotTest {
 
     @Test
     public void test_dot_format_WhileNext() {
+
+
+
+        var ds = DataSource.of("A", "B", "C");
+
+        Seq.of(ds).peek(s -> System.out.println(s))
+                .anyMatch(e -> e.equals("B"));
+
+
+
+
         Seq.of(DataSource.of(DIRECTED_SOURCE))
                 .anyMatch(edge -> Objects.equals(edge.source(), "A"));
     }

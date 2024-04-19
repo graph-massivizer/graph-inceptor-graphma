@@ -17,11 +17,9 @@ module data {
 
     requires magma;
 
+    exports data;
+
     exports data.suitesparse;
 
-    exports data.differenformats;
-
     exports formats;
-
-    exports data;
 }

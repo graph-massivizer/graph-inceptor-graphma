@@ -1,6 +1,7 @@
 package playground.demos;
 
 import data.suitesparse.SSDB;
+import formats.Mtx;
 import magma.data.sequence.operator.DataSource;
 import magma.data.sequence.operator.lazy.Filter;
 import magma.data.sequence.operator.lazy.Peek;
@@ -20,7 +21,7 @@ public enum GraphToFile {
                 .compose(Peek.build(System.out::println))
                 .compose(GraphPipeline.Graph.graph(DefaultEdge.class))
                 .compose(Take.build(1))
-                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
+                .compose(Filter.build((Mtx.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
                 .apply(DataSource.of(SSDB.SMALL))
                 .evaluate();
     }

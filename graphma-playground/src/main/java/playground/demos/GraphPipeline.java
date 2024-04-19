@@ -1,6 +1,7 @@
 package playground.demos;
 
 import data.suitesparse.SSDB;
+import formats.Mtx;
 import magma.adt.value.product.Product2;
 import magma.control.traversal.Traversable;
 import magma.data.sequence.operator.DataSource;
@@ -154,7 +155,7 @@ public enum GraphPipeline {
         Graph.print()
                 .compose(Graph.cluster())
                 .compose(Graph.graph(DefaultEdge.class))
-                .compose(Filter.build((SSDB.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
+                .compose(Filter.build((Mtx.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
                 .apply(DataSource.of(SSDB.SMALL))
                 .evaluate();
 
