@@ -10,4 +10,4 @@
 /**
  * Magma standard library.
  */
-package formats;
+package data.suitesparse;

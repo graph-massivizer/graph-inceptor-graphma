@@ -9,6 +9,12 @@ import java.util.Objects;
 
 import static data.Config.GRAPH_FORMATS;
 
+/**
+ * These are not really tests. More demos with printouts to check if stuff works.
+ *
+ * Actual unit tests will follow
+ *
+ */
 public class MtxTest {
 
     private static final DataSource<Mtx.Long2LongEdge> DIRECTED_SOURCE =

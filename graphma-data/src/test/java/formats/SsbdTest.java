@@ -7,6 +7,12 @@ import magma.data.sequence.operator.lazy.Map;
 import magma.data.sequence.operator.strict.ForNext;
 import org.junit.jupiter.api.Test;
 
+/**
+ * These are not really tests. More demos with printouts to check if stuff works.
+ *
+ * Actual unit tests will follow
+ *
+ */
 public class SsbdTest {
 
     @Test

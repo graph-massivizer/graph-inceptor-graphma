@@ -11,6 +11,12 @@ import java.util.Objects;
 
 import static data.Config.GRAPH_FORMATS;
 
+/**
+ * These are not really tests. More demos with printouts to check if stuff works.
+ *
+ * Actual unit tests will follow
+ *
+ */
 public class DotTest {
 
     private static final DataSource<String2StringEdge> DIRECTED_SOURCE =
