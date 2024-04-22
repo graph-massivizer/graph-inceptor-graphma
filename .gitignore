@@ -65,4 +65,4 @@ coverage.db*
 checksums*
 *.lock
 *.bin
-/benchmarkResults/
+/benchmarkResults/*
