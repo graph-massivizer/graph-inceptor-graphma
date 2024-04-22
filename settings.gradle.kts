@@ -41,6 +41,7 @@ rootProject.name = "graphma"
 include("graphma-core")
 include("graphma-data")
 include("graphma-playground")
+include("graphma-betatesting")
 
 // check that every subproject has a custom build file  based on the project name
 rootProject.children.forEach { project ->
