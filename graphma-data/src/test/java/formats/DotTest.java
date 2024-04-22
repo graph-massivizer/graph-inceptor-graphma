@@ -1,5 +1,6 @@
 package formats;
 
+import data.differenformats.FormatsDB;
 import formats.Dot.String2StringEdge;
 import magma.data.Seq;
 import magma.data.sequence.operator.DataSource;
@@ -14,7 +15,7 @@ public class DotTest {
 
     private static final DataSource<String2StringEdge> DIRECTED_SOURCE =
             DataSource.of(
-                    new Dot.DotFile(GRAPH_FORMATS.resolve("dot").resolve("directed_graph.dot"),
+                    new Dot.DotFile(FormatsDB.DIRECTED_DOT,
                             9999,
                             9999,
                             9999,

@@ -1,5 +1,6 @@
 package formats;
 
+import data.differenformats.FormatsDB;
 import magma.data.Seq;
 import magma.data.sequence.operator.DataSource;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ public class GmlTest {
 
     private static final DataSource<Gml.String2StringEdge> DIRECTED_SOURCE =
             DataSource.of(
-                    new Gml.GmlFile(GRAPH_FORMATS.resolve("gml").resolve("directed_graph.gml"),
+                    new Gml.GmlFile(FormatsDB.DIRECTED_GML,
                             9999,
                             9999,
                             9999,

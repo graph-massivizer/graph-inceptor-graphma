@@ -1,5 +1,6 @@
 package formats;
 
+import data.differenformats.FormatsDB;
 import magma.data.Seq;
 import magma.data.sequence.operator.DataSource;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,8 @@ public class MtxTest {
 
     private static final DataSource<Mtx.Long2LongEdge> DIRECTED_SOURCE =
             DataSource.of(
-                    new Mtx.MTXFile(GRAPH_FORMATS.resolve("mtx").resolve("directed_graph.mtx"),
+                    new Mtx.MTXFile(
+                            FormatsDB.DIRECTED_MTX,
                             9999,
                             9999,
                             9999,
