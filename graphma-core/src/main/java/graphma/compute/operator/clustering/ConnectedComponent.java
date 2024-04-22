@@ -9,13 +9,43 @@ import org.jgrapht.Graph;
 import java.util.Set;
 import java.util.List;
 
+/**
+ * Provides utilities for computing connected components within graphs. Connected components are
+ * subsets of a graph where each vertex is connected to at least one other vertex in the subset,
+ * and no vertex in a given subset is connected to any vertex outside that subset.
+ *
+ * <p>This class is part of a computational pipeline that enables integration with other data processing
+ * operations, making it easier to manage complex workflows in graph analysis.</p>
+ *
+ * <p>Usage example:</p>
+ * <pre>
+ * {@code
+ * ForNext.build(System.out::println)
+ *                 .compose(Map.build(r -> r + "\n--------\n"))
+ *                 .compose(ConnectedComponent.cluster())
+ *                 .compose(MtxToUndirectedGraph.of(DefaultEdge.class))
+ *                 .compose(Filter.build((Mtx.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
+ *                 .apply(DataSource.of(SSDB.SMALL))
+ *                 .evaluate();
+ * }
+ * </pre>
+ */
 public enum ConnectedComponent {
     ;
 
-    public static <V, E,
-            G extends Graph<V, E>,
-            B extends List<Set<V>>,
-            P extends Pipeline<?, ?>>
+    /**
+     * Constructs a pipeline stage that computes the connected components of a graph.
+     * This method returns a composer that facilitates integrating this computation as a stage
+     * in a data processing pipeline, offering a modular approach for building complex data processing scenarios.
+     *
+     * @param <V> the vertex type
+     * @param <E> the edge type
+     * @param <G> the graph type, extending JGraphT's Graph interface
+     * @param <B> the output type, expected to be a List of Sets, each Set containing the vertices of a connected component
+     * @param <P> the type of the pipeline
+     * @return a composer that constructs a pipeline stage for computing connected components
+     */
+    public static <V, E, G extends Graph<V, E>, B extends List<Set<V>>, P extends Pipeline<?, ?>>
     Composer<P, Pipeline.Stage<B, P>> cluster() {
 
         final class _ConnectedComponent extends Pipeline.AbstractBase<P> implements Pipeline.Stage<B, P> {
@@ -53,3 +83,4 @@ public enum ConnectedComponent {
         return _ConnectedComponent::new;
     }
 }
+

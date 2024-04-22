@@ -2,15 +2,12 @@ package formats;
 
 import magma.adt.control.traversal.Traversal;
 import magma.control.function.Fn1;
-import magma.control.function.Fn2;
 import magma.control.traversal.Traversable;
 import magma.control.traversal.Traverser;
 import magma.value.index.Range;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
@@ -19,22 +16,48 @@ import java.nio.file.StandardOpenOption;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static formats.Utils.*;
 import static java.lang.Math.min;
 
+/**
+ * Dot class is designed to read and traverse .dot (Graphviz) graph description files.
+ * It provides functionalities to interpret and iterate over the graph's edges.
+ *
+ * This is a preliminary implementation. The idea is to first prototype complete
+ * pipelines in order to subsequently improve them.
+ */
 public enum Dot {
     ;
 
+    /**
+     * Interface representing a directed or undirected edge in a graph with source and target identified by strings.
+     * Within the traverser there is only one instance of this interface to avoid massive object creation.
+     *
+     * TODO: These edges shouldn't be here but collected in a different class file. Will be done when actual datastructures are added
+     */
     public interface String2StringEdge {
         String source();
         String target();
     }
 
+    /**
+     * Creates a traverser for a given .dot file based on specified range and position.
+     * The function will read edges from the file starting at the given file position.
+     *
+     * @param mtxPth the path to the .dot file.
+     * @param slice a range indicating the part of the file to read.
+     * @param position the starting position in the file for reading.
+     * @return a Traverser capable of iterating over edges defined within the specified file range.
+     */
     public static Traverser<String2StringEdge> traverse(Path mtxPth, final Range slice, final long position) {
         if (Files.notExists(mtxPth) || Range.isEmpty(slice))
             return Traverser.empty();
         return new Dot.DotTraverser(slice, position, mtxPth);
     }
 
+    /**
+     * DotFile record encapsulates a .dot file's path and structural information such as rows, columns, and number of lines.
+     */
     public record DotFile(Path pth, int rows, int cols, int lines,
                           int numCol) implements Traversable<String2StringEdge> {
         public Traverser<String2StringEdge> traverse() {
@@ -42,15 +65,13 @@ public enum Dot {
         }
     }
 
-    static final Fn2.Checked<BufferedReader, char[], Integer> readBuffer = Reader::read;
-    static final Fn1.Checked<Path, BufferedReader> newReader = pth -> new BufferedReader(new FileReader(pth.toFile()));
-    static final Fn1.Checked<BufferedReader, Boolean> closeReader = rea -> {
-        rea.close();
-        return true;
-    };
-
-    // TODO Memory mapped files for performance
-    // TODO change cursor
+    /**
+     * DotTraverser class implements the Traverser interface to navigate through the graph described in a .dot file.
+     * It uses regular expressions to parse graph edges and provides methods to iterate over them.
+     *
+     * TODO Memory mapped files for performance
+     * TODO change cursor
+     */
     static final class DotTraverser extends Traversal.Control.Context implements Traverser<String2StringEdge> {
         private final DotTraverser.Cursor cursor;
         private final BufferedReader reader;
@@ -68,6 +89,13 @@ public enum Dot {
         private boolean isDirected;
         private final String[] line = new String[2];
 
+        /**
+         * Constructor initializes a new DotTraverser instance for a specific section of a .dot file.
+         *
+         * @param slice the segment of the file to be processed.
+         * @param pos the starting position in the file.
+         * @param path the path to the .dot file.
+         */
         private DotTraverser(final Range slice, final long pos, final Path path) {
             System.out.println("CONSTRUCTOR");
             this.cursor = new DotTraverser.Cursor();
@@ -98,7 +126,9 @@ public enum Dot {
 //            System.out.println("SYMMETRY: " + entries);
         }
 
-
+        /**
+         * Initializes reading by processing the header to determine if the graph is directed or undirected.
+         */
         private void initHeader() {
             StringBuilder headerBuilder = new StringBuilder();
             while (bx < numCharsRead) {
@@ -132,6 +162,9 @@ public enum Dot {
             }
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public boolean tryNext(Fn1.Consumer<? super String2StringEdge> action) {
             System.out.println("TRY NEXT");
@@ -175,6 +208,9 @@ public enum Dot {
             }
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public void forNext(Fn1.Consumer<? super String2StringEdge> action) {
             System.out.println("FOR NEXT");
@@ -211,6 +247,9 @@ public enum Dot {
             closeReader.apply(reader);
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public Traversal.Status whileNext(Fn1<Traversal.Control, Fn1.Consumer<? super String2StringEdge>> context) {
             System.out.println("WHILE NEXT");
