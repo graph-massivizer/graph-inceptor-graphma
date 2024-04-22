@@ -21,6 +21,4 @@ public enum ApacheArrow {
             System.out.println("Vector created in memory: " + intVector);
         }
     }
-
-
 }
