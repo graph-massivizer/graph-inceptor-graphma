@@ -61,7 +61,7 @@ public class ExampleTest {
     }
 
     /**
-     * This is an exampe for the sequence api.
+     * This is an example for the sequence api.
      */
     @Test
     public void test_sequence() {
