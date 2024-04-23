@@ -5,13 +5,13 @@ This document outlines the necessary steps to set up the Graphma project for bet
 
 - **graphma-core**: The core library where the main functionality of the project is implemented.
 - **graphma-data**: This subproject contains logic to handle different graph formats and serves as the link to test data. Test data is stored in a separate repository known as `datademorepo`.
-- **graphma-benchmark**: Used for performance testing and benchmarking the functionalities developed in `graphma-core` and `graphma-data`.
+- **graphma-betatesting**: In this subproject are the beta testers supposed to work in.
 - **graphma-playground**: A less critical subproject intended for experimental testing of various libraries or code snippets that may eventually be integrated into the core project. **This subproject is not essential for beta testing and should be ignored.**
 
-The main focus for beta testing should be on `graphma-core`, `graphma-data`, and `graphma-benchmark`. These subprojects are crucial for assessing the project's performance, stability, and its capability to process and analyze graph data effectively.
+The main focus for beta testing should be on `graphma-core` and `graphma-data`. These subprojects are crucial for assessing the project's performance, stability, and its capability to process and analyze graph data effectively.
 
 ## Prerequisites
-Before you start, ensure that you have Java SDK installed on your system, preferably the version that matches the project's requirements (e.g., Java 11 or 17). You can download and install the Java SDK from [AdoptOpenJDK](https://adoptopenjdk.net/) or [Oracle's official Java site](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).
+Before you start, ensure that you have Java SDK installed on your system, preferably the version that matches the project's requirements (**Java 17 with Preview** or +). You can download and install the Java SDK from [AdoptOpenJDK](https://adoptopenjdk.net/), [Oracle's official Java site](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) or with the help of intellj.
 
 ## Installing IntelliJ IDEA
 IntelliJ IDEA is an IDE developed by JetBrains that supports Java and a multitude of other programming languages. Follow these steps to download and install IntelliJ IDEA:
@@ -46,12 +46,7 @@ Once IntelliJ IDEA is installed, you can load the Graphma project into the IDE:
    - To build the project and verify that everything is set up correctly, go to `View > Tool Windows > Gradle`.
    - In the Gradle tool window, navigate to `Tasks > build > build` and double-click to run the build task.
 
-5. **Run Beta Tests**:
-   - Navigate to the test directory in any of the modules.
-   - Right-click on any test and select `Run 'TestName'` to execute the test and observe the output.
-
-## Further Steps
-After setting up the project, you can start beta testing as per the defined test cases or testing procedures. Ensure to keep track of any issues or bugs in the project's issue tracker or designated documentation.
-
-## Getting Help
-If you encounter any issues during setup or testing, consult the [IntelliJ IDEA documentation](https://www.jetbrains.com/idea/documentation/) or seek help on StackOverflow and the JetBrains community forums.
+5. **Perform Beta Tests**:
+   - Navigate to the **graphma-betatesting** submodule.
+   - The tasks (scenario 1 - 5) are described in the **test** package.
+   - We use the junit-jupiter framework with the corresponding gradle plugin. Thus, the beta tester should be able to run the tests from the IDE (e.g. Intellj).
