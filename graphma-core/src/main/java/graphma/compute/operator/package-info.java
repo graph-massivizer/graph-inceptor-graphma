@@ -10,4 +10,4 @@
 /**
  * Magma standard library.
  */
-package graphma.compute.operator.transform;
+package graphma.compute.operator;
