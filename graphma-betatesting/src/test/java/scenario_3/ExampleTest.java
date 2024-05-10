@@ -2,6 +2,7 @@ package scenario_3;
 
 import data.suitesparse.SSDB;
 import formats.Mtx;
+import graphma.compute.operator.centralities.ClusteringCoefficient;
 import graphma.compute.operator.transform.MtxToUndirectedGraph;
 import magma.data.sequence.operator.DataSource;
 import magma.data.sequence.operator.Operator;
