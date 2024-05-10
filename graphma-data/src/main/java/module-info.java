@@ -13,7 +13,7 @@
  * <p>This includes APIs for value representations, control flow abstractions,
  * containers & computation data structures.
  */
-module data {
+module graphma.data {
 
     requires magma;
 

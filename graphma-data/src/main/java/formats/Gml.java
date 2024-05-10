@@ -2,15 +2,13 @@ package formats;
 
 import magma.adt.control.traversal.Traversal;
 import magma.control.exception.Exceptions;
-import magma.control.function.*;
+import magma.control.function.Fn1;
 import magma.control.traversal.Traversable;
 import magma.control.traversal.Traverser;
 import magma.value.index.Range;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
@@ -19,33 +17,68 @@ import java.nio.file.StandardOpenOption;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// TODO make fully functional, only prototyped
+import static formats.Utils.*;
+
+
+/**
+ * Provides utilities for parsing and traversing Graph Modeling Language (GML) files.
+ * This class supports creating traversable views of GML data, focusing on extracting edges between nodes.
+ * <p>
+ * Usage involves creating a {@link Traverser} that can iterate over edges defined within a GML file,
+ * allowing for custom actions to be performed on each edge encountered.
+ * </p>
+ *
+ * This is a preliminary implementation. The idea is to first prototype complete
+ * pipelines in order to subsequently improve them.
+ *
+ * TODO make fully functional, only prototyped
+ */
 public enum Gml {
     ;
 
+    /**
+     * Interface representing a directed or undirected edge in a graph with source and target identified by strings.
+     * Within the traverser there is only one instance of this interface to avoid massive object creation.
+     *
+     * TODO: These edges shouldn't be here but collected in a different class file. Will be done when actual datastructures are added
+     */
     public interface String2StringEdge {
         String source();
         String target();
     }
 
+    /**
+     * Creates a traverser to iterate over the edges in a GML file, starting from a specified position.
+     * This method only considers edges within the specified range in the file.
+     *
+     * @param gmlPath the path to the GML file
+     * @param slice the range of lines in the file to process
+     * @param position the starting position within the range
+     * @return a {@link Traverser} for edges, or an empty traverser if the file does not exist or the range is empty
+     */
     public static Traverser<String2StringEdge> traverse(Path gmlPath, final Range slice, final long position) {
         if (Files.notExists(gmlPath) || Range.isEmpty(slice))
             return Traverser.empty();
         return new GmlTraverser(slice, position, gmlPath);
     }
 
+    /**
+     * Record to encapsulate a GML file's metadata and provide a method to create a traverser for its content.
+     */
     public record GmlFile(Path pth, int rows, int cols, int lines,
                           int numCol) implements Traversable<String2StringEdge> {
+        /**
+         * Creates a traverser to iterate over all edges defined in the associated GML file.
+         * @return a traverser for edges
+         */
         public Traverser<String2StringEdge> traverse() {
             return Gml.traverse(pth, Range.of(0, lines), 0);
         }
     }
 
-    static final Fn2.Checked<BufferedReader, char[], Integer> readBuffer = Reader::read;
-    static final Fn1.Checked<Path, BufferedReader> newReader = pth -> new BufferedReader(new FileReader(pth.toFile()));
-    static final Fn1.Checked<BufferedReader, Boolean> closeReader = rea -> { rea.close(); return true; };
-
-
+    /**
+     * Implementation of a {@link Traverser} specific to GML files, capable of parsing edges from the file's content.
+     */
     static final class GmlTraverser extends Traversal.Control.Context implements Traverser<String2StringEdge> {
         private final Cursor cursor;
         private final BufferedReader reader;
@@ -63,6 +96,15 @@ public enum Gml {
         private boolean isDirected;
         private final String[] line = new String[2];
 
+        /**
+         * Constructs a GmlTraverser to parse edges from a GML file.
+         * This constructor initializes the reader and starts reading from the specified position.
+         * It determines whether the graph is directed and prepares to parse edges.
+         *
+         * @param slice the range of lines to read
+         * @param pos the starting position within the file
+         * @param path the path to the GML file
+         */
         private GmlTraverser(final Range slice, final long pos, final Path path) {
             this.cursor = new Cursor();
             this.reader = newReader.apply(path);
@@ -92,6 +134,9 @@ public enum Gml {
             System.out.println("IX: " + ix);
         }
 
+        /**
+         * Initializes reading by processing the header to determine if the graph is directed or undirected.
+         */
         private void initHeader() {
             StringBuilder headerBuilder = new StringBuilder();
             boolean inGraphBlock = false;
@@ -137,6 +182,9 @@ public enum Gml {
             return numCharsRead != -1;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public boolean tryNext(Fn1.Consumer<? super String2StringEdge> action) {
             StringBuilder blockBuilder = new StringBuilder();
@@ -179,7 +227,9 @@ public enum Gml {
             return false; // If we reach here, no more edges to process or end of file
         }
 
-
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public void forNext(Fn1.Consumer<? super String2StringEdge> action) {
             System.out.println("FOR NEXT");
@@ -231,6 +281,9 @@ public enum Gml {
             }
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public Traversal.Status whileNext(Fn1<Traversal.Control, Fn1.Consumer<? super String2StringEdge>> context) {
             StringBuilder blockBuilder = new StringBuilder();

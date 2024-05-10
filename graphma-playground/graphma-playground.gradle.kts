@@ -21,20 +21,28 @@ tasks.register<Jar>("fatJar") {
 	with(tasks.jar.get() as CopySpec)
 }
 
-dependencies {
-	testImplementation(libs.bundles.testDependencies)
-	implementation(libs.bundles.magmaDependencies)
-	implementation(libs.bundles.jgraphT)
-	implementation(libs.bundles.arrowDependencies)
-	implementation(libs.bundles.apacheCommons)
-//	implementation(libs.arrow.dataset)
-//	implementation(libs.arrow.vector)
-//	implementation(libs.arrow.memory)
-//	runtimeOnly(libs.arrow.memory.netty)
+tasks.withType<JavaExec> {
+	doFirst {
+		println("TODO remove! Hello World - Starting test tasks")
+	}
 
-//	implementation("org.apache.arrow:arrow-memory:12.0.1")
-//	implementation("org.apache.arrow:arrow-vector:12.0.1")
-//	implementation("org.apache.arrow:arrow-dataset:12.0.1")
-//	runtimeOnly("org.apache.arrow:arrow-memory-netty:12.0.1")
+	doLast {
+		println("TODO remove! Hello World - Finished test tasks")
+	}
+
+	jvmArgs("--add-opens", "java.base/java.nio=ALL-UNNAMED")
+}
+
+tasks.withType<Test> {
+	jvmArgs("--add-opens", "java.base/java.nio=ALL-UNNAMED")
+}
+
+dependencies {
+	testImplementation(libs.bundles.test)
+	implementation(libs.bundles.magma)
+	implementation(libs.bundles.jgraphT)
+	implementation(libs.bundles.apacheArrow)
+	implementation(libs.bundles.apacheCommons)
 	implementation(project(":graphma-data"))
+	implementation(project(":graphma-core"))
 }

@@ -9,13 +9,42 @@ import org.jgrapht.Graph;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Provides utilities for computing the degree centrality for nodes in a graph.
+ * Degree centrality is a straightforward metric that measures the number of edges connected to a vertex.
+ * This metric can help identify highly connected nodes within a network, which are often considered to be influential.
+ *
+ * <p>This implementation integrates with a pipeline processing framework, allowing degree centrality
+ * calculations to be composed as part of larger data processing operations.</p>
+ *
+ * <p>Usage example:</p>
+ * <pre>
+ * {@code
+ * ForNext.build(System.out::println)
+ *                 .compose(Map.build(r -> r + "\n-------\n"))
+ *                 .compose(DegreeCentrality.centrality())
+ *                 .compose(MtxToUndirectedGraph.of(DefaultEdge.class))
+ *                 .compose(Filter.build((Mtx.MTXFile mtx) -> mtx.lines() < 40 && mtx.lines() > 20))
+ *                 .apply(DataSource.of(SSDB.SMALL))
+ *                 .evaluate();
+ * }
+ * </pre>
+ */
 public enum DegreeCentrality {
     ;
 
-    public static <V, E,
-            G extends Graph<V, E>,
-            B extends Map<V, Double>,  // Using Double for consistency, though degree centrality values will be integers
-            P extends Pipeline<?, ?>>
+    /**
+     * Constructs a pipeline stage that computes the degree centrality for each vertex in a graph.
+     * This method returns a composer that can be used to integrate this computation as a stage in a pipeline.
+     *
+     * @param <V> the vertex type
+     * @param <E> the edge type
+     * @param <G> the graph type, extending JGraphT's Graph interface
+     * @param <B> the output type, expected to be a Map from vertices to their degree centrality scores
+     * @param <P> the type of the pipeline
+     * @return a composer that constructs a pipeline stage for computing degree centrality
+     */
+    public static <V, E, G extends Graph<V, E>, B extends Map<V, Double>, P extends Pipeline<?, ?>>
     Composer<P, Pipeline.Stage<B, P>> centrality() {
 
         final class _DegreeCentrality extends Pipeline.AbstractBase<P> implements Pipeline.Stage<B, P> {

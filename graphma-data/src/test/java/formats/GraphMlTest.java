@@ -1,5 +1,6 @@
 package formats;
 
+import data.differenformats.FormatsDB;
 import magma.data.Seq;
 import magma.data.sequence.operator.DataSource;
 import org.junit.jupiter.api.Test;
@@ -8,11 +9,18 @@ import java.util.Objects;
 
 import static data.Config.GRAPH_FORMATS;
 
+/**
+ * These are not really tests. More demos with printouts to check if stuff works.
+ *
+ * Actual unit tests will follow
+ *
+ */
 public class GraphMlTest {
 
     private static final DataSource<GraphML.String2StringEdge> DIRECTED_SOURCE =
             DataSource.of(
-                    new GraphML.GraphMLFile(GRAPH_FORMATS.resolve("graphml").resolve("directed_graph.graphml"),
+                    new GraphML.GraphMLFile(
+                            FormatsDB.DIRECTED_GRAPHML,
                             9999,
                             9999,
                             9999,

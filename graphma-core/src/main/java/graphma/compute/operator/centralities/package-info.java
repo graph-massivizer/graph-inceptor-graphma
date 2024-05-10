@@ -10,4 +10,4 @@
 /**
  * Magma standard library.
  */
-package graphma;
+package graphma.compute.operator.centralities;

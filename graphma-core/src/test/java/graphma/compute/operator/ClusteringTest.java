@@ -16,6 +16,12 @@ import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 import org.junit.jupiter.api.Test;
 
+/**
+ * These are not really tests. More demos with printouts to check if stuff works.
+ *
+ * Actual unit tests will follow
+ *
+ */
 final class ClusteringTest {
 
     @Test
