@@ -66,6 +66,7 @@ public class ExampleTest {
     @Test
     public void test_sequence() {
         var ds = DataSource.of("A", "B", "C", "D", "E", "F");
+
         var count = Seq.of(ds)
                 .drop(2)
                 .filterNot(e -> e.equals("E"))

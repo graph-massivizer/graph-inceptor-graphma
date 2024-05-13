@@ -1,0 +1,347 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+
+<http://ontologies.metaphacts.com/cineca_m100> a owl:Ontology;
+  <http://purl.org/dc/terms/title> "cineca_m100";
+  <http://purl.org/dc/terms/creator> "Junaid Ahmed Khan";
+  rdfs:label "cineca_m100";
+  <http://purl.org/dc/terms/description> "Ontology for the upcoming conference";
+  owl:versionInfo "1.0";
+  <http://purl.org/dc/terms/contributor> "Martin Molan", "Andrea Bartolini";
+  <http://purl.org/dc/terms/created> "2023-12-11T00:00:00Z"^^xsd:dateTime;
+  <http://www.linkedmodel.org/1.2/schema/vaem#namespace> <http://ontologies.metaphacts.com/cineca_m100/> .
+
+[] a sh:NodeShape;
+  sh:targetClass <http://ontologies.metaphacts.com/cineca_m100/Node>;
+  sh:property <http://ontologies.metaphacts.com/cineca_m100/08775a44-56ea-4f9c-a1bd-afd44849a73d>,
+    <http://ontologies.metaphacts.com/cineca_m100/70b2b62d-2de7-40de-a3c3-ebf89573fb43>,
+    <http://ontologies.metaphacts.com/cineca_m100/c74dd59d-d710-4b84-a431-cf6b38d8c5fa> .
+
+<http://ontologies.metaphacts.com/cineca_m100/08775a44-56ea-4f9c-a1bd-afd44849a73d>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/nodeId>;
+  sh:datatype xsd:integer;
+  sh:minCount 1;
+  sh:maxCount 1 .
+
+<http://ontologies.metaphacts.com/cineca_m100/70b2b62d-2de7-40de-a3c3-ebf89573fb43>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/hasPosition>;
+  sh:class <http://ontologies.metaphacts.com/cineca_m100/Position> .
+
+<http://ontologies.metaphacts.com/cineca_m100/c74dd59d-d710-4b84-a431-cf6b38d8c5fa>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/hasPlugin>;
+  sh:class <http://ontologies.metaphacts.com/cineca_m100/Plugin> .
+
+<http://ontologies.metaphacts.com/cineca_m100/Node> a owl:Class;
+  rdfs:label "Node";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+[] a sh:NodeShape;
+  sh:targetClass <http://ontologies.metaphacts.com/cineca_m100/ParquetFile>;
+  sh:property <http://ontologies.metaphacts.com/cineca_m100/1dca4b39-174f-4095-9fd3-496ff4aad676>,
+    <http://ontologies.metaphacts.com/cineca_m100/de6dcff6-32bf-4507-b1e6-cff7978ca415>,
+    <http://ontologies.metaphacts.com/cineca_m100/f42fe790-8b9a-4e7f-8880-98f7ddb4c6a7> .
+
+<http://ontologies.metaphacts.com/cineca_m100/1dca4b39-174f-4095-9fd3-496ff4aad676>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/fileName>;
+  sh:datatype xsd:string;
+  sh:minCount 1;
+  sh:maxCount 1 .
+
+<http://ontologies.metaphacts.com/cineca_m100/de6dcff6-32bf-4507-b1e6-cff7978ca415>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/endTimestamp>;
+  sh:datatype xsd:dateTime;
+  sh:minCount 1;
+  sh:maxCount 1 .
+
+<http://ontologies.metaphacts.com/cineca_m100/f42fe790-8b9a-4e7f-8880-98f7ddb4c6a7>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/startTimestamp>;
+  sh:datatype xsd:dateTime;
+  sh:minCount 1;
+  sh:maxCount 1 .
+
+<http://ontologies.metaphacts.com/cineca_m100/ParquetFile> a owl:Class;
+  rdfs:label "Parquet File";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+[] a sh:NodeShape;
+  sh:targetClass <http://ontologies.metaphacts.com/cineca_m100/Sensor>;
+  sh:property <http://ontologies.metaphacts.com/cineca_m100/28ac14d4-2c8a-465a-b2ec-f68686ea3955>,
+    <http://ontologies.metaphacts.com/cineca_m100/5ce6f240-8d76-4783-b2dd-6507d8c1fed6>,
+    <http://ontologies.metaphacts.com/cineca_m100/90b480b6-3aa3-4cec-a81b-e9e8ec0d7bcb> .
+
+<http://ontologies.metaphacts.com/cineca_m100/28ac14d4-2c8a-465a-b2ec-f68686ea3955>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/sensorName>;
+  sh:datatype xsd:string;
+  sh:minCount 1;
+  sh:maxCount 1 .
+
+<http://ontologies.metaphacts.com/cineca_m100/5ce6f240-8d76-4783-b2dd-6507d8c1fed6>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/sensorType>;
+  sh:datatype xsd:string;
+  sh:minCount 1;
+  sh:maxCount 1 .
+
+<http://ontologies.metaphacts.com/cineca_m100/90b480b6-3aa3-4cec-a81b-e9e8ec0d7bcb>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/hasReading>;
+  sh:class <http://ontologies.metaphacts.com/cineca_m100/SensorReading> .
+
+<http://ontologies.metaphacts.com/cineca_m100/Sensor> a owl:Class;
+  rdfs:label "Sensor";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+[] a sh:NodeShape;
+  sh:targetClass <http://ontologies.metaphacts.com/cineca_m100/Plugin>;
+  sh:property <http://ontologies.metaphacts.com/cineca_m100/cb3d2728-daeb-4c85-b478-e22cbbc2b4ed>,
+    <http://ontologies.metaphacts.com/cineca_m100/fa7467a5-3c35-41d2-8a3d-a9a1f4157954> .
+
+<http://ontologies.metaphacts.com/cineca_m100/cb3d2728-daeb-4c85-b478-e22cbbc2b4ed>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/pluginName>;
+  sh:datatype xsd:string;
+  sh:minCount 1;
+  sh:maxCount 1 .
+
+<http://ontologies.metaphacts.com/cineca_m100/fa7467a5-3c35-41d2-8a3d-a9a1f4157954>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/hasSensor>;
+  sh:class <http://ontologies.metaphacts.com/cineca_m100/Sensor> .
+
+<http://ontologies.metaphacts.com/cineca_m100/Plugin> a owl:Class;
+  rdfs:label "Plugin";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+[] a sh:NodeShape;
+  sh:targetClass <http://ontologies.metaphacts.com/cineca_m100/Position>;
+  sh:property <http://ontologies.metaphacts.com/cineca_m100/51bb71ed-fc43-4cf9-9367-9e3ec7c61f6b>,
+    <http://ontologies.metaphacts.com/cineca_m100/9daed8f8-5bb3-44ef-a3c9-dea7df763bb4>,
+    <http://ontologies.metaphacts.com/cineca_m100/beb35fc9-7f68-4a81-8b88-42226bac22dd> .
+
+<http://ontologies.metaphacts.com/cineca_m100/51bb71ed-fc43-4cf9-9367-9e3ec7c61f6b>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/posZ>;
+  sh:datatype xsd:integer;
+  sh:minCount 1;
+  sh:maxCount 1 .
+
+<http://ontologies.metaphacts.com/cineca_m100/9daed8f8-5bb3-44ef-a3c9-dea7df763bb4>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/posX>;
+  sh:datatype xsd:integer;
+  sh:minCount 1;
+  sh:maxCount 1 .
+
+<http://ontologies.metaphacts.com/cineca_m100/beb35fc9-7f68-4a81-8b88-42226bac22dd>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/posY>;
+  sh:datatype xsd:integer;
+  sh:minCount 1;
+  sh:maxCount 1 .
+
+<http://ontologies.metaphacts.com/cineca_m100/Position> a owl:Class;
+  rdfs:label "Position";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+[] a sh:NodeShape;
+  sh:targetClass <http://ontologies.metaphacts.com/cineca_m100/SensorReading>;
+  sh:property <http://ontologies.metaphacts.com/cineca_m100/16fd119b-a196-4d2f-a440-af0e8dc6e909>,
+    <http://ontologies.metaphacts.com/cineca_m100/47ca5127-ede0-4691-bf78-117fb528e4d1>,
+    <http://ontologies.metaphacts.com/cineca_m100/74fa5d8e-d56d-4e9a-83cc-f8a2de8a5709>,
+    <http://ontologies.metaphacts.com/cineca_m100/d86507f2-bbed-4ec6-a403-5b9761b8e3a4> .
+
+<http://ontologies.metaphacts.com/cineca_m100/16fd119b-a196-4d2f-a440-af0e8dc6e909>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/value>;
+  sh:datatype xsd:double;
+  sh:minCount 1;
+  sh:maxCount 1 .
+
+<http://ontologies.metaphacts.com/cineca_m100/47ca5127-ede0-4691-bf78-117fb528e4d1>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/isPartOf>;
+  sh:class <http://ontologies.metaphacts.com/cineca_m100/ParquetFile> .
+
+<http://ontologies.metaphacts.com/cineca_m100/74fa5d8e-d56d-4e9a-83cc-f8a2de8a5709>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/unit>;
+  sh:datatype xsd:string;
+  sh:minCount 1;
+  sh:maxCount 1 .
+
+<http://ontologies.metaphacts.com/cineca_m100/d86507f2-bbed-4ec6-a403-5b9761b8e3a4>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/timestamp>;
+  sh:datatype xsd:dateTime;
+  sh:minCount 1;
+  sh:maxCount 1 .
+
+<http://ontologies.metaphacts.com/cineca_m100/SensorReading> a owl:Class;
+  rdfs:label "Sensor Reading";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+[] a sh:NodeShape;
+  sh:targetClass <http://ontologies.metaphacts.com/cineca_m100/Job>;
+  sh:property <http://ontologies.metaphacts.com/cineca_m100/0f4eb9e9-0a70-4769-b6c7-a56c4991a9e6>,
+    <http://ontologies.metaphacts.com/cineca_m100/3b041001-e02c-425e-bc6b-03dac644a10a>,
+    <http://ontologies.metaphacts.com/cineca_m100/556b24bc-3be5-491e-80ad-041835777993>,
+    <http://ontologies.metaphacts.com/cineca_m100/5e5b3133-818d-419a-863e-cd23379e7ab4> .
+
+<http://ontologies.metaphacts.com/cineca_m100/0f4eb9e9-0a70-4769-b6c7-a56c4991a9e6>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/endTime>;
+  sh:datatype xsd:dateTime;
+  sh:minCount 1;
+  sh:maxCount 1 .
+
+<http://ontologies.metaphacts.com/cineca_m100/3b041001-e02c-425e-bc6b-03dac644a10a>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/jobId>;
+  sh:datatype xsd:integer;
+  sh:minCount 1;
+  sh:maxCount 1 .
+
+<http://ontologies.metaphacts.com/cineca_m100/556b24bc-3be5-491e-80ad-041835777993>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/startTime>;
+  sh:datatype xsd:dateTime;
+  sh:minCount 1;
+  sh:maxCount 1 .
+
+<http://ontologies.metaphacts.com/cineca_m100/5e5b3133-818d-419a-863e-cd23379e7ab4>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/usesNode>;
+  sh:class <http://ontologies.metaphacts.com/cineca_m100/Node> .
+
+<http://ontologies.metaphacts.com/cineca_m100/Job> a owl:Class;
+  rdfs:label "Job";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+[] a sh:NodeShape;
+  sh:targetClass <http://ontologies.metaphacts.com/cineca_m100/Rack>;
+  sh:property <http://ontologies.metaphacts.com/cineca_m100/098f286e-a0b7-439b-93a6-c41a687851b4>,
+    <http://ontologies.metaphacts.com/cineca_m100/36587899-979b-4825-ae74-0bfeaabf3fff> .
+
+<http://ontologies.metaphacts.com/cineca_m100/098f286e-a0b7-439b-93a6-c41a687851b4>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/rackId>;
+  sh:datatype xsd:integer;
+  sh:minCount 1;
+  sh:maxCount 1 .
+
+<http://ontologies.metaphacts.com/cineca_m100/36587899-979b-4825-ae74-0bfeaabf3fff>
+  a sh:PropertyShape;
+  sh:path <http://ontologies.metaphacts.com/cineca_m100/hasNode>;
+  sh:class <http://ontologies.metaphacts.com/cineca_m100/Node> .
+
+<http://ontologies.metaphacts.com/cineca_m100/Rack> a owl:Class;
+  rdfs:label "Rack";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/nodeId> a owl:DatatypeProperty;
+  rdfs:label "Node ID";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/rackId> a owl:DatatypeProperty;
+  rdfs:label "Rack ID";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/endTime> a owl:DatatypeProperty;
+  rdfs:label "End Time";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/value> a owl:DatatypeProperty;
+  rdfs:label "Value";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/fileName> a owl:DatatypeProperty;
+  rdfs:label "File Name";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/sensorName> a owl:DatatypeProperty;
+  rdfs:label "Sensor Name";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/hasNode> a owl:ObjectProperty;
+  rdfs:label "Has Node";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/jobId> a owl:DatatypeProperty;
+  rdfs:label "Job ID";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/isPartOf> a owl:ObjectProperty;
+  rdfs:label "is Part of";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/posZ> a owl:DatatypeProperty;
+  rdfs:label "Pos Z";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/startTime> a owl:DatatypeProperty;
+  rdfs:label "Start Time";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/sensorType> a owl:DatatypeProperty;
+  rdfs:label "Sensor Type";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/usesNode> a owl:ObjectProperty;
+  rdfs:label "Uses Node";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/hasPosition> a owl:ObjectProperty;
+  rdfs:label "Has Position";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/unit> a owl:DatatypeProperty;
+  rdfs:label "Unit";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/hasReading> a owl:ObjectProperty;
+  rdfs:label "Has Reading";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/posX> a owl:DatatypeProperty;
+  rdfs:label "Pos X";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/posY> a owl:DatatypeProperty;
+  rdfs:label "Pos Y";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/hasPlugin> a owl:ObjectProperty;
+  rdfs:label "Has Plugin";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/pluginName> a owl:DatatypeProperty;
+  rdfs:label "Plugin Name";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/timestamp> a owl:DatatypeProperty;
+  rdfs:label "Timestamp";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/endTimestamp> a owl:DatatypeProperty;
+  rdfs:label "End Timestamp";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/startTimestamp> a owl:DatatypeProperty;
+  rdfs:label "Start Timestamp";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
+
+<http://ontologies.metaphacts.com/cineca_m100/hasSensor> a owl:ObjectProperty;
+  rdfs:label "Has Sensor";
+  rdfs:isDefinedBy <http://ontologies.metaphacts.com/cineca_m100> .
