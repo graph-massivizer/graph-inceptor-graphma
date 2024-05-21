@@ -37,7 +37,7 @@ java -jar graphma-betatesting.jar -s1 PATH_TO_INPUT_FOLDER/input PATH_TO_RESULT_
 java -jar graphma-betatesting.jar -s2 PATH_TO_RESULT_FOLDER/intermediate.csv PATH_TO_RESULT_FOLDER/intermediate.graphml
 ```
 
-### Stage 2: Find cluster using label propagation
+### Stage 3: Find cluster using label propagation
 ```bash
 # PERFORM LABEL PROPAGATION CLUSTERING
 java -jar graphma-betatesting.jar -s3 PATH_TO_RESULT_FOLDER/intermediate.graphml
