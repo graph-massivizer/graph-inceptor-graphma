@@ -115,7 +115,4 @@ We have implemented the following terminal operators:
 
 ![architecture](./doc/inceptor.png)
 
-## Tool Tests
-| Test | Validates Condition | Pass/Failure Criteria | Description |
-| ---- | ------------------- | --------------------- | ----------- |
-|||||
+
