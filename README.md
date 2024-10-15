@@ -114,8 +114,3 @@ We have implemented the following terminal operators:
 # Proposed Architecture for Graph Inceptor 
 
 ![architecture](./doc/inceptor.png)
-
-
-
-hgjfgj
-
