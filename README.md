@@ -21,17 +21,25 @@ Key outcomes delivered for the final review:
 - **Deterministic testing** – Reuses SuiteSparse datasets inside an immutable Gradle submodule for reproducible validation runs.
 - **Extensible architecture** – Modules are isolated (core, data, playground, beta testing) while sharing publishing conventions.
 
-## Module Overview
 
-- `graphma-core` – Pipeline runtime, operator implementations, and Magma bindings.
-- `graphma-data` – Parsers and converters (DOT, GML, MTX, Matrix representations, Parquet, Apache Arrow datasets).
-- `graphma-betatesting` – End-to-end experiment harnesses used during project validation.
-- `graphma-playground` – Sandboxes and usage examples for new adopters.
-- `demoDataRepo` – Reference datasets used in demos and during integration testing.
+## Framework Structure
 
-The architecture diagram below summarises how these modules interact with Magma and downstream consumers.
+```mermaid
+flowchart LR
+	Magma[(Magma Core Library)] --> Core[graphma-core\nPipeline Runtime]
+	Core --> Data[graphma-data\nParsers & Converters]
+	Data --> Demo[demoDataRepo\nReference Datasets]
+	Demo --> Data
+	SuiteSparse[SuiteSparse Submodule] --> Data
+	Core --> Beta[graphma-betatesting\nValidation Harness]
+	Data --> Beta
+	Core --> Playground[graphma-playground\nUsage Examples]
+	Data --> Playground
+	Beta --> Downstream[Benchmarks & UI Layers]
+	Playground --> Downstream
+```
 
-![architecture](./doc/inceptor.png)
+The diagram highlights how GraphMa layers abstractions: Magma provides the foundational pipeline semantics, `graphma-core` hosts GraphMa-specific operators, `graphma-data` adapts heterogeneous graph sources, while `graphma-betatesting` and `graphma-playground` consume both runtimes to deliver validation suites and interactive examples. Datasets from `demoDataRepo` and the SuiteSparse module feed the data layer, and the downstream benchmarking/UI stack consumes both the beta testing and playground outputs.
 
 ## Dependencies and Tooling
 
