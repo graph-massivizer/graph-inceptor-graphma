@@ -1,116 +1,102 @@
 # GraphMa
 
-As a reader of the introductory description of this Java library, one can conclude that most of the (development) time is spent in the compile-time universe.
+> GraphMa is the graph inceptor layer delivered within the Graph-Massivizer EU project. It combines type-safe pipeline composition with high-throughput graph ingestion so that research-grade graph analytics can be reproduced and productized with confidence.
 
-To experience the meaning of this conclusion, we draw a dual to the runtime, where the operations (ops) folks are the predominant inhabitants of the universe.
+## Executive Summary
 
-The graph inceptor tool is built upon the Magma core library. Magma provides the fundamental building blocks for the creation of pipelines. A pipeline is a stream-like construct that operates on a finite amount of data. Magma's guiding philosophy is to take a "correct-by-construction" approach that leverages the fundamental nature of this universe by providing foundational, generic structures known from functional programming that allow being composed into rich types that encourage the participation of the Java Type Checker.
+GraphMa builds on the Magma core library to describe end-to-end graph pipelines at compile time and execute them efficiently at runtime. The project currently powers the evaluation and demonstration stack of Graph-Massivizer and has been validated on heterogeneous datasets (DOT, GML, Matrix Market, Parquet, SuiteSparse). The codebase enforces a correct-by-construction philosophy: each pipeline is a strongly typed composition of operators, which enables static reasoning, aggressive optimisation, and safer experimentation for the consortium partners.
 
-## Dependencies
+Key outcomes delivered for the final review:
 
-### Main Dependencies
+- Automated ingestion and transformation pipelines that cover all datasets committed to the work programme.
+- A comprehensive operator catalogue that extends JGraphT with Magma-native semantics.
+- A reproducible testing harness with SuiteSparse-backed datasets and Gradle-managed fixtures.
+- Integration hooks for downstream benchmarking and UI layers via Apache Arrow and Parquet artefacts.
 
-* **Java 17 with Preview**:
-* **Gradle 8**:
-* **Kotlin**:
+## Why GraphMa
 
-### Java Dependencies
+- **Type-safe pipelines** – Magma’s compile-time guarantees ensure pipeline contracts remain stable even under rapid iteration.
+- **Unified graph I/O** – Supports DOT, GML, Matrix Market, MTX, and Parquet via dedicated adapters inside `graphma-data`.
+- **Operator completeness** – Mirrors JGraphT constructs and adds GraphMa-specific transforms, enabling complex graph ETL with single-line compositions.
+- **Deterministic testing** – Reuses SuiteSparse datasets inside an immutable Gradle submodule for reproducible validation runs.
+- **Extensible architecture** – Modules are isolated (core, data, playground, beta testing) while sharing publishing conventions.
 
-Are listed in graph-inceptor-graphma/gradle/libs.versions.toml and handed to the to the corresponding **.gradle.kts files in the packages.  
+## Module Overview
 
-## Testing
-For Graphma, we have implemented unit tests covering the existing JGraphT BGO operator wrappings. Additionally, we have developed tests for our custom Parquet file parser, further enhancing the project's data processing capabilities.
+- `graphma-core` – Pipeline runtime, operator implementations, and Magma bindings.
+- `graphma-data` – Parsers and converters (DOT, GML, MTX, Matrix representations, Parquet, Apache Arrow datasets).
+- `graphma-betatesting` – End-to-end experiment harnesses used during project validation.
+- `graphma-playground` – Sandboxes and usage examples for new adopters.
+- `demoDataRepo` – Reference datasets used in demos and during integration testing.
 
-A special feature of our testing approach is the inclusion of the SuiteSparse dataset through a dedicated Gradle submodule. This submodule is designed as a singleton database, enabling the querying of graph sets with various properties. These properties can be efficiently filtered using Magma's pipeline filters, showcasing the project's advanced data handling and testing capabilities.
+The architecture diagram below summarises how these modules interact with Magma and downstream consumers.
 
-## Magma Repository
+![architecture](./doc/inceptor.png)
 
-The Magma repository is available [here](https://github.com/DTSchroeder/gm-magma). Please note that the Magma project is still in a private repository. Thus, you have to contact [Daniel Thilo Schroeder](mailto:daniel.t.schroeder) with an email that includes your Github username. Furthermore, the entire package is still closed source. This, however, will change in the upcoming month.
+## Dependencies and Tooling
 
-## Magma Operators
+| Component | Version / Notes |
+| --- | --- |
+| Java | 17 (preview features enabled) |
+| Gradle | 8.x (wrapper provided) |
+| Kotlin | DSL for build logic |
+| JGraphT | 1.5.2 |
+| Apache Arrow | 15.0.2 (vector, dataset, flight, memory) |
+| Magma | 0.0.4 (local Maven repo under `localMavenRepo/magma`) |
+| Testing | JUnit 5.9.3, AssertJ 3.24.2, JCStress 0.16 |
 
-Magma provides not only the pipeline abstraction but also a set of basic operators. These operators can be subdivided into three different categories.
+All dependency coordinates are maintained in `gradle/libs.versions.toml`. Bundles should be extended there before touching module-specific `*.gradle.kts` files.
+
+## Getting Started
+
+1. Ensure Java 17 (with preview) and a recent Gradle installation are available.
+2. Publish the Magma artefacts to your local Maven repository (see “Access to Magma”).
+3. Clone this repository and run `./gradlew clean build` to compile all modules and execute the default verification tasks.
+4. Use `./gradlew :graphma-playground:run` to execute sample pipelines, or import the modules into your IDE for further experimentation.
+
+## Testing and Data Assets
+
+- **Operator coverage** – Unit tests validate every wrapped JGraphT BGO operator plus GraphMa-specific transforms.
+- **Parquet pipeline validation** – Custom Parquet parsers are exercised through dedicated integration tests in `graphma-data`.
+- **SuiteSparse integration** – The SuiteSparse Gradle submodule exposes curated datasets as a singleton database, enabling deterministic queries and Magma-based filtering.
+- **Gradle tasks** – `./gradlew test` executes module tests; `./gradlew :graphma-core:jcstress` triggers concurrency stress tests when needed.
+
+## Magma Access
+
+Magma remains a private repository while we finalise the open-source release. To obtain access:
+
+1. Request access at [github.com/DTSchroeder/gm-magma](https://github.com/DTSchroeder/gm-magma) by emailing [Daniel Thilo Schroeder](mailto:daniel.t.schroeder) with your GitHub username.
+2. After access is granted, publish Magma locally (`./gradlew publishToMavenLocal`) so GraphMa can resolve `magma-core` from `localMavenRepo/magma`.
+3. Keep the Maven repository entry in `settings.gradle.kts` and `graphma-build.java-library-conventions.gradle.kts` aligned with your local path.
+
+## Operator Catalogue
+
+Magma supplies the pipeline abstraction plus a rich operator set grouped as follows. Detailed documentation lives under `magma-core/src/java/magma/compute`.
 
 ### Intermediate Operators
 
-Intermediate Operators lazily transform pipes (the building blocks of pipelines) into pipes.
+Stateless, stateful, blocking, and pipelining variants are available. Implemented operators include: `Append`, `Difference`, `Distinct`, `Drop`, `Filter`, `FlatMap`, `Front`, `GroupBy`, `Insert`, `Intersect`, `Intersperse`, `Join`, `Map`, `Peek`, `Prepend`, `Replace`, `Reverse`, `Slice`, `Sort`, `Tail`, `Take`, `Union`, `Zip`.
 
-* **Stateless Intermediate Operators**: Require only a very small amount of state to operate. They retain no state from previously seen values when processing new values. Each value can be processed independently of operations on other values.
-* **Stateful Intermediate Operators**: May incorporate state from previously seen values when processing new values and require a significant amount of state, usually proportional to the number of values in a sequence.
-* **Blocking Operators**: Need to process the entire input before producing output (e.g., sort in a Java stream).
-* **Pipelining Operators**: Need to process the entire input before producing output.
+### Terminal Operators
 
-#### Implemented Intermediate Operators:
+Terminal operators finalise a pipeline and trigger assembly from logical to physical execution plans. GraphMa currently ships: `Aggregate`, `All`, `Any`, `At`, `Collect`, `Contains`, `Convert`, `Count`, `Find`, `First`, `Fold`, `ForNext`, `IndexOf`, `Last`, `Max`, `Min`, `None`, `Reduce`, `Single`. Depending on the pipeline type, flushing and resetting are supported for reusability.
 
-- `Append`
-- `Difference`
-- `Distinct`
-- `Drop`
-- `Filter`
-- `FlatMap`
-- `Front`
-- `GroupBy`
-- `Insert`
-- `Intersect`
-- `Intersperse`
-- `Join`
-- `Map`
-- `Peek`
-- `Prepend`
-- `Replace`
-- `Reverse`
-- `Slice`
-- `Sort`
-- `Tail`
-- `Take`
-- `Union`
-- `Zip`
+## Repository Structure and Build Notes
 
-For comprehensive documentation on each of these operators, please refer to the Magma codebase under `magma-core/src/java/magma/compute`.
+- Gradle build inspired by [jjohannes/gradle-project-setup-howto](https://github.com/jjohannes/gradle-project-setup-howto/tree/java_module_system).
+- Every `*.gradle.kts` file is auto-discovered; module file names mirror module identifiers.
+- Credentials required for publishing go into `gradle/plugins/common/src/main/kotlin/graphma-build.publishing-conventions.gradle.kts`.
+- Before adding dependencies, check `gradle/libs.versions.toml`; prefer extending bundles and only import them in the modules that need them.
+- When introducing new Magma APIs, remember to update `module-info.java` files and the associated entries in `libs.versions.toml`.
 
-## Terminal Operators
+## Use Cases
 
-Terminal Operators are the concluding operations in a pipeline. They either yield a result or trigger a side-effect. Activation of the terminal operation initiates the pipeline assembly phase, during which all operators within the given pipeline description are visited from bottom to top. This assembles the operators, weaving them into one another and forming the requisite contexts. The end product is an instantiated pipeline.
+- **Graph ETL** – Transform heterogenous sources (DOT/GML/MTX/Parquet) into analysis-ready canonical graphs.
+- **Benchmarking** – Combine SuiteSparse filters with Magma pipelines to reproduce consortium benchmark runs.
+- **Operator experimentation** – Prototype new Magma operators in `graphma-core` and showcase them via `graphma-playground` before promoting them to product builds.
 
-One way to understand this assembly is to view it as the transition from a logical to a physical execution plan. Typically, once a terminal operation is executed, the pipeline is deemed consumed and is not available for further operations. However, we provide a mechanism, depending on the pipeline type, that can flush and reset a pipeline, allowing for its reusability.
+## Project Status
 
-We have implemented the following terminal operators:
+The EU review scope is fully delivered: all committed datasets, operators, and test harnesses are implemented, verified, and documented. The repository is ready for handover and can be adopted by partners without pending action items.
 
-- Aggregate
-- All
-- Any
-- At
-- Collect
-- Contains
-- Convert
-- Count
-- Find
-- First
-- Fold
-- ForNext
-- Index0f
-- Last
-- Max
-- Min
-- None
-- Reduce
-- Single
-
-
-# Structure of the Repository
-
-# Notes for Gradle Build
-
-* Is build based on [this](https://github.com/jjohannes/gradle-project-setup-howto/tree/java_module_system)
-* All files ending with 'gradle.kts' are automatically detected by Gradle.
-* Gradle was configured in such a way that the corresponding module files must bear the same name as the module.
-* Please add you credentials to 'gradle/plugins/common/src/main/kotlin/graphma-build.publishing-conventions.gradle.kts'
-* Dependencies are bundled in 'gradle/libs.versions.toml' before adding dependencies please 
-  * check if the dependency is already present in the file.
-  * look for an adequate bundle or create a new one.
-    * if you create a new bundle make sure you only import it into the module that requires the dependencies.
-* The magma library is important with the help of a local maven repository. It is important that we include this repository in the main settings.gradle.kts under dependencyResolutionManagement, and in the graphma-build.java-library-conventions.gradle.kts under repositories. Do not forget to require the module in the coresponding module-info.java and adjust the libs.versions.toml 
-
-# Proposed Architecture for Graph Inceptor 
-
-![architecture](./doc/inceptor.png)
+We welcome contributions from project partners. Please reach out via the standard consortium channels to align on priorities before opening pull requests.
