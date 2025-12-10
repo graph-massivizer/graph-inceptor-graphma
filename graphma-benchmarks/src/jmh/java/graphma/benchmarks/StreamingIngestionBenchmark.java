@@ -43,11 +43,9 @@ public class StreamingIngestionBenchmark {
     private static final double PERCENTILE_RANK = 0.95;
 
     public static void main(String[] args) throws InterruptedException {
-        // 1. Setup Thread-Safe JGraphT Graph
-        // JGraphT is not thread-safe by default, so we synchronize it for concurrent access
-        Graph<String, DefaultEdge> graph = Collections.synchronizedGraph(
-                new DefaultDirectedGraph<>(DefaultEdge.class)
-        );
+        // 1. Setup JGraphT Graph
+        // We use synchronized blocks in the consumer since we have a single consumer thread
+        Graph<String, DefaultEdge> graph = new DefaultDirectedGraph<>(DefaultEdge.class);
 
         // Buffer to decouple Producer and Consumer
         BlockingQueue<EdgeEvent> buffer = new LinkedBlockingQueue<>(10_000);
