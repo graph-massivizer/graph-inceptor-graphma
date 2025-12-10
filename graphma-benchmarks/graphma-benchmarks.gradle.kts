@@ -16,6 +16,7 @@ description = "graphma-benchmarks"
 
 dependencies {
     implementation(project(":graphma-core"))
+    implementation(project(":graphma-data"))
     implementation(libs.bundles.jgraphT)
     implementation(libs.bundles.magma)
     jmh("org.openjdk.jmh:jmh-core:1.37")
@@ -44,5 +45,13 @@ tasks.register<JavaExec>("runGraphMaBenchmark") {
     description = "Run the GraphMa streaming ingestion benchmark (KPI-1.2)"
     classpath = sourceSets["jmh"].runtimeClasspath
     mainClass.set("graphma.benchmarks.GraphMaStreamingIngestionBenchmark")
+}
+
+// Task to run the GraphMa MTX file ingestion benchmark
+tasks.register<JavaExec>("runMtxIngestionBenchmark") {
+    group = "benchmark"
+    description = "Run the GraphMa MTX file ingestion benchmark with stateful operator (KPI-1.2)"
+    classpath = sourceSets["jmh"].runtimeClasspath
+    mainClass.set("graphma.benchmarks.GraphMaMtxIngestionBenchmark")
 }
 
